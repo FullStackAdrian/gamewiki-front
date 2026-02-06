@@ -51,7 +51,7 @@ const responseBody = <T>(response: AxiosResponse): T => {
   throw new Error(message);
 };
 
-export const createRequest = (baseURL: string, token: string | null) => {
+const createRequest = (baseURL: string, token: string | null) => {
   const axiosInstance = createAxiosInstance( baseURL ,token ? token : undefined);
   return {
     get: <TResponse, TRequest>(
@@ -70,3 +70,5 @@ export const createRequest = (baseURL: string, token: string | null) => {
         .then(response => responseBody<TResponse>(response))
   };
 };
+
+export default createRequest;
