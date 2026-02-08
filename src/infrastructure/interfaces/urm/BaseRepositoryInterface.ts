@@ -1,13 +1,13 @@
-import type { BaseRequest } from "../dto/BaseRequest";
-import type { BaseResponse } from "../dto/BaseResponse";
+import type { BaseRequestInterface } from "../dto/BaseRequestInterface";
+import type { BaseResponseInterface } from "../dto/BaseResponseInterface";
 
 export interface BaseRepositoryInterface<
-  TRequest extends BaseRequest,
-  TResponse extends BaseResponse,
+  TRequest extends BaseRequestInterface,
+  T,
 > {
-  create(request: TRequest): Promise<TResponse>;
-  getById(id: string): Promise<TResponse>;
-  getAll(): Promise<TResponse[]>;
-  updateById(id: string, request: TRequest): Promise<TResponse>;
-  deleteById(id: string): Promise<void>;
+  create(request: TRequest): Promise<BaseResponseInterface<T>>;
+  getById(id: string): Promise<BaseResponseInterface<T>>;
+  getAll(): Promise<BaseResponseInterface<T>[]>;
+  updateById(id: string, request: TRequest): Promise<BaseResponseInterface<T>>;
+  deleteById(id: string): Promise<BaseResponseInterface<T>>;
 }

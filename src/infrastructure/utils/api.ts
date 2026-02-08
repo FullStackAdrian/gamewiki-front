@@ -1,13 +1,16 @@
 import axios, { AxiosError } from "axios";
 import type { AxiosInstance, AxiosResponse } from "axios";
+import type { BaseResponseInterface } from "../interfaces/dto/BaseResponseInterface";
 
-
-const createAxiosInstance = (baseURL: string , token?: string | undefined): AxiosInstance => {
+const createAxiosInstance = (
+  baseURL: string,
+  token?: string | undefined,
+): AxiosInstance => {
   const instance = axios.create({
-    baseURL: baseURL
+    baseURL: baseURL,
   });
 
-  instance.interceptors.request.use(config => {
+  instance.interceptors.request.use((config) => {
     if (token !== undefined) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -15,7 +18,7 @@ const createAxiosInstance = (baseURL: string , token?: string | undefined): Axio
   });
 
   instance.interceptors.response.use(
-    res => res,
+    (res) => res,
     (error: AxiosError) => {
       const { data, status } = error.response!;
       switch (status) {
@@ -33,41 +36,46 @@ const createAxiosInstance = (baseURL: string , token?: string | undefined): Axio
           break;
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   return instance;
 };
 
 // this return the viewModel if it exists, otherwise trhow an error with response message
-const responseBody = <T>(response: AxiosResponse): T => {
+const responseBody = <T>(response: AxiosResponse): BaseResponseInterface<T> => {
+  const status = response.status;
+  const message = response.data?.message || "Respuesta del servidor inválida";
   const viewModel = response.data?.content?.viewModel;
 
-  if (viewModel !== undefined) {
-    return viewModel as T;
-  }
+  // if (viewModel == null) {
+  //   throw new Error(message ?? "Respuesta inválida del servidor");
+  // }
 
-  const message = response.data?.message || "Respuesta del servidor inválida";
-  throw new Error(message);
+  return {
+    status,
+    message,
+    data: viewModel as T,
+  } as BaseResponseInterface<T>;
 };
 
 const createRequest = (baseURL: string, token: string | null) => {
-  const axiosInstance = createAxiosInstance( baseURL ,token ? token : undefined);
+  const axiosInstance = createAxiosInstance(baseURL, token ? token : undefined);
   return {
-    get: <TResponse, TRequest>(
+    get: <T, TRequest>(
       url: string,
-      body: TRequest
-    ): Promise<TResponse> =>
+      body: TRequest,
+    ): Promise<BaseResponseInterface<T>> =>
       axiosInstance
         .post(url, body)
-        .then(response => responseBody<TResponse>(response)),
-    post: <TResponse, TRequest>(
+        .then((response) => responseBody<T>(response)),
+    post: <T, TRequest>(
       url: string,
-      body: TRequest
-    ): Promise<TResponse> =>
+      body: TRequest,
+    ): Promise<BaseResponseInterface<T>> =>
       axiosInstance
         .post(url, body)
-        .then(response => responseBody<TResponse>(response))
+        .then((response) => responseBody<T>(response)),
   };
 };
 
