@@ -6,8 +6,8 @@ export interface BaseRepositoryInterface<
   T,
 > {
   create(request: TRequest): Promise<BaseResponseInterface<T>>;
-  getById(id: string): Promise<BaseResponseInterface<T>>;
-  getAll(): Promise<BaseResponseInterface<T>[]>;
-  updateById(id: string, request: TRequest): Promise<BaseResponseInterface<T>>;
-  deleteById(id: string): Promise<BaseResponseInterface<T>>;
+  getById(request: TRequest): Promise<BaseResponseInterface<T>>;
+  getAll(request: TRequest): Promise<BaseResponseInterface<T[]>>;
+  updateById(request: TRequest): Promise<BaseResponseInterface<T>>;
+  deleteById(request: TRequest): Promise<BaseResponseInterface<T>>;
 }

@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import type { AxiosInstance, AxiosResponse } from "axios";
 import type { BaseResponseInterface } from "../interfaces/dto/BaseResponseInterface";
+import type { BaseRequestInterface } from "../interfaces/dto/BaseRequestInterface";
 
 const createAxiosInstance = (
   baseURL: string,
@@ -62,19 +63,39 @@ const responseBody = <T>(response: AxiosResponse): BaseResponseInterface<T> => {
 const createRequest = (baseURL: string, token: string | null) => {
   const axiosInstance = createAxiosInstance(baseURL, token ? token : undefined);
   return {
-    get: <T, TRequest>(
-      url: string,
-      body: TRequest,
+    get: <T, TRequest extends BaseRequestInterface>(
+      request: TRequest,
     ): Promise<BaseResponseInterface<T>> =>
       axiosInstance
-        .post(url, body)
+        .get(request.uri)
         .then((response) => responseBody<T>(response)),
-    post: <T, TRequest>(
-      url: string,
-      body: TRequest,
+
+    post: <T, TRequest extends BaseRequestInterface>(
+      request: TRequest,
     ): Promise<BaseResponseInterface<T>> =>
       axiosInstance
-        .post(url, body)
+        .post(request.uri, request.body)
+        .then((response) => responseBody<T>(response)),
+
+    put: <T, TRequest extends BaseRequestInterface>(
+      request: TRequest,
+    ): Promise<BaseResponseInterface<T>> =>
+      axiosInstance
+        .put(request.uri, request.body)
+        .then((response) => responseBody<T>(response)),
+
+    patch: <T, TRequest extends BaseRequestInterface>(
+      request: TRequest,
+    ): Promise<BaseResponseInterface<T>> =>
+      axiosInstance
+        .patch(request.uri, request.body)
+        .then((response) => responseBody<T>(response)),
+
+    delete: <T, TRequest extends BaseRequestInterface>(
+      request: TRequest,
+    ): Promise<BaseResponseInterface<T>> =>
+      axiosInstance
+        .delete(request.uri)
         .then((response) => responseBody<T>(response)),
   };
 };
