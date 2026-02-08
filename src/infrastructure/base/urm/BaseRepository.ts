@@ -3,7 +3,7 @@ import type { BaseResponseInterface } from "../interfaces/dto/BaseResponseInterf
 import type { BaseRepositoryInterface } from "../interfaces/urm/BaseRepositoryInterface";
 import createRequest from "../utils/api";
 
-export class BaseRepository<
+export abstract class BaseRepository<
   TRequest extends BaseRequestInterface,
   TEnt,
 > implements BaseRepositoryInterface<TRequest, TEnt> {
