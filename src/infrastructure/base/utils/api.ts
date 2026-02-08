@@ -43,60 +43,60 @@ const createAxiosInstance = (
   return instance;
 };
 
-// this return the viewModel if it exists, otherwise trhow an error with response message
-const responseBody = <T>(response: AxiosResponse): BaseResponseInterface<T> => {
+// this return just status and message, and data if it exists, otherwise trhow an error with response message
+const responseBody = <TEnt>(response: AxiosResponse): BaseResponseInterface<TEnt> => {
   const status = response.status;
   const message = response.data?.message || "Respuesta del servidor inválida";
-  const viewModel = response.data?.content?.viewModel;
+  const data = response.data?.content?.viewModel;
 
-  // if (viewModel == null) {
+  // if (data as TEnt ) {
   //   throw new Error(message ?? "Respuesta inválida del servidor");
   // }
 
   return {
     status,
     message,
-    data: viewModel as T,
-  } as BaseResponseInterface<T>;
+    data: data as TEnt,
+  } as BaseResponseInterface<TEnt>;
 };
 
 const createRequest = (baseURL: string, token: string | null) => {
   const axiosInstance = createAxiosInstance(baseURL, token ? token : undefined);
   return {
-    get: <T, TRequest extends BaseRequestInterface>(
+    get: <TEnt, TRequest extends BaseRequestInterface>(
       request: TRequest,
-    ): Promise<BaseResponseInterface<T>> =>
+    ): Promise<BaseResponseInterface<TEnt>> =>
       axiosInstance
         .get(request.uri)
-        .then((response) => responseBody<T>(response)),
+        .then((response) => responseBody<TEnt>(response)),
 
-    post: <T, TRequest extends BaseRequestInterface>(
+    post: <TEnt, TRequest extends BaseRequestInterface>(
       request: TRequest,
-    ): Promise<BaseResponseInterface<T>> =>
+    ): Promise<BaseResponseInterface<TEnt>> =>
       axiosInstance
         .post(request.uri, request.body)
-        .then((response) => responseBody<T>(response)),
+        .then((response) => responseBody<TEnt>(response)),
 
-    put: <T, TRequest extends BaseRequestInterface>(
+    put: <TEnt, TRequest extends BaseRequestInterface>(
       request: TRequest,
-    ): Promise<BaseResponseInterface<T>> =>
+    ): Promise<BaseResponseInterface<TEnt>> =>
       axiosInstance
         .put(request.uri, request.body)
-        .then((response) => responseBody<T>(response)),
+        .then((response) => responseBody<TEnt>(response)),
 
-    patch: <T, TRequest extends BaseRequestInterface>(
+    patch: <TEnt, TRequest extends BaseRequestInterface>(
       request: TRequest,
-    ): Promise<BaseResponseInterface<T>> =>
+    ): Promise<BaseResponseInterface<TEnt>> =>
       axiosInstance
         .patch(request.uri, request.body)
-        .then((response) => responseBody<T>(response)),
+        .then((response) => responseBody<TEnt>(response)),
 
-    delete: <T, TRequest extends BaseRequestInterface>(
+    delete: <TEnt, TRequest extends BaseRequestInterface>(
       request: TRequest,
-    ): Promise<BaseResponseInterface<T>> =>
+    ): Promise<BaseResponseInterface<TEnt>> =>
       axiosInstance
         .delete(request.uri)
-        .then((response) => responseBody<T>(response)),
+        .then((response) => responseBody<TEnt>(response)),
   };
 };
 

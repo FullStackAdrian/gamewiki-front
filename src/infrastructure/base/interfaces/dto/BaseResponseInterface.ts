@@ -1,5 +1,5 @@
-export interface BaseResponseInterface< T > {
+export interface BaseResponseInterface<TEnt> {
   status: number;
   message?: string;
-  data?: T;
+  data?: TEnt;
 }
