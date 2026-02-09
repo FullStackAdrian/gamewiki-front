@@ -1,9 +1,9 @@
-import type { BaseEntityInterface } from "./BaseEntityInterface";
+import type { BaseModelInterface } from "../dto/BaseModelInterface";
 
-export interface BaseServiceInterface<TEnt extends BaseEntityInterface> {
-  create(entity: TEnt): Promise<TEnt>;
-  getById(id: string): Promise<TEnt>;
-  getAll(): Promise<TEnt[]>;
-  updateById(id: string, entity: TEnt): Promise<TEnt>;
+export interface BaseServiceInterface<TModel extends BaseModelInterface> {
+  create(entity: TModel): Promise<TModel>;
+  getById(id: string): Promise<TModel>;
+  getAll(): Promise<TModel[]>;
+  updateById(id: string, entity: TModel): Promise<TModel>;
   deleteById(id: string): Promise<void>;
 }

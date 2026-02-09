@@ -1,30 +1,30 @@
 import type { BaseRequestInterface } from "../interfaces/dto/BaseRequestInterface";
-import type { BaseEntityInterface } from "../interfaces/urm/BaseEntityInterface";
+import type { BaseModelInterface } from "../interfaces/dto/BaseModelInterface";
 import type { BaseServiceInterface } from "../interfaces/urm/BaseServiceInterface";
 import type { BaseRepository } from "./BaseRepository";
 import type { BaseMapper } from "./BaseMapper";
 
 export class BaseService<
-  TEnt extends BaseEntityInterface,
+  TModel extends BaseModelInterface,
   TRequest extends BaseRequestInterface,
-> implements BaseServiceInterface<TEnt> {
+> implements BaseServiceInterface<TModel> {
   constructor(
-    repository: BaseRepository<TRequest, TEnt>,
-    mapper: BaseMapper<TEnt, TRequest>,
+    repository: BaseRepository<TRequest, TModel>,
+    mapper: BaseMapper<TModel, TRequest>,
   ) {
     this.repository = repository;
     this.mapper = mapper;
   }
-  protected repository: BaseRepository<TRequest, TEnt>;
-  protected mapper: BaseMapper<TEnt, TRequest>; 
+  protected repository: BaseRepository<TRequest, TModel>;
+  protected mapper: BaseMapper<TModel, TRequest>; 
 
-  async create(entity: TEnt): Promise<TEnt> {
+  async create(entity: TModel): Promise<TModel> {
     const request = await this.mapper.entToRequest(entity);
     const response = await this.repository.create(request);
     return this.mapper.responseToEnt(response);
   }
 
-  async getById(id: string): Promise<TEnt> {
+  async getById(id: string): Promise<TModel> {
     const request = {
       uri: `/${id}`,
     } as TRequest;
@@ -33,7 +33,7 @@ export class BaseService<
     return this.mapper.responseToEnt(response);
   }
 
-  async getAll(): Promise<TEnt[]> {
+  async getAll(): Promise<TModel[]> {
     const request = {
       uri: "/",
     } as TRequest;
@@ -42,7 +42,7 @@ export class BaseService<
     return this.mapper.responseArrayToEntArray(response);
   }
 
-  async updateById(id: string, entity: TEnt): Promise<TEnt> {
+  async updateById(id: string, entity: TModel): Promise<TModel> {
     const request = await this.mapper.entToRequest(entity);
     request.uri = `/${id}`;
 

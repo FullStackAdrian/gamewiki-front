@@ -1,5 +1,7 @@
-export interface BaseResponseInterface<TEnt> {
+import type { BaseModelInterface } from "./BaseModelInterface";
+
+export interface BaseResponseInterface<TModel extends BaseModelInterface> {
   status: number;
   message?: string;
-  data?: TEnt;
+  data?: TModel | TModel[];
 }
