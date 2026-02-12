@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
 import type { AxiosInstance, AxiosResponse } from "axios";
-import type { BaseResponseInterface } from "../interfaces/dto/BaseResponseInterface";
-import type { BaseRequestInterface } from "../interfaces/dto/BaseRequestInterface";
-import type { BaseModelInterface } from "../interfaces/dto/BaseModelInterface";
+import type { BaseResponseInterface } from "../../../domain/abstractions/dto/BaseResponseInterface";
+import type { BaseRequestInterface } from "../../../domain/abstractions/dto/BaseRequestInterface";
+import type { BaseModelInterface } from "../../../domain/abstractions/dto/BaseModelInterface";
 
 const createAxiosInstance = (
   baseURL: string,

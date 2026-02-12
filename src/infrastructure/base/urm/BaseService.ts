@@ -1,9 +1,9 @@
 import type { BaseServiceInterface } from "../interfaces/urm/BaseServiceInterface";
-import type { BaseModelInterface } from "../interfaces/dto/BaseModelInterface";
+import type { BaseModelInterface } from "../../../domain/abstractions/dto/BaseModelInterface";
 import type { BaseRepositoryInterface } from "../interfaces/urm/BaseRepositoryInterface";
 import type { BaseMapperInterface } from "../interfaces/urm/BaseMapperInterface";
-import type { BaseRequestInterface } from "../interfaces/dto/BaseRequestInterface";
-import type { BaseResponseInterface } from "../interfaces/dto/BaseResponseInterface";
+import type { BaseRequestInterface } from "../../../domain/abstractions/dto/BaseRequestInterface";
+import type { BaseResponseInterface } from "../../../domain/abstractions/dto/BaseResponseInterface";
 
 export class BaseService<
   TModel extends BaseModelInterface,

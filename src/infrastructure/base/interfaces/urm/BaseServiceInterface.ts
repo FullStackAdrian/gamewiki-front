@@ -1,4 +1,4 @@
-import type { BaseModelInterface } from "../dto/BaseModelInterface";
+import type { BaseModelInterface } from "../../../../domain/abstractions/dto/BaseModelInterface";
 
 export interface BaseServiceInterface<TModel extends BaseModelInterface> {
   create(entity: TModel): Promise<TModel>;

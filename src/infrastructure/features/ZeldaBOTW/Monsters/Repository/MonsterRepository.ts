@@ -1,4 +1,4 @@
-import type { BaseModelInterface } from "../../../../base/interfaces/dto/BaseModelInterface";
+import type { BaseModelInterface } from "../../../../../domain/abstractions/dto/BaseModelInterface";
 import { BaseRepository } from "../../../../base/urm/BaseRepository";
 import type { MonsterModel } from "../Context/MonsterModel";
 

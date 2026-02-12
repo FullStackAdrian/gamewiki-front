@@ -1,6 +1,6 @@
-import type { BaseRequestInterface } from "../interfaces/dto/BaseRequestInterface";
-import type { BaseResponseInterface } from "../interfaces/dto/BaseResponseInterface";
-import type { BaseModelInterface } from "../interfaces/dto/BaseModelInterface";
+import type { BaseRequestInterface } from "../../../domain/abstractions/dto/BaseRequestInterface";
+import type { BaseResponseInterface } from "../../../domain/abstractions/dto/BaseResponseInterface";
+import type { BaseModelInterface } from "../../../domain/abstractions/dto/BaseModelInterface";
 import type { BaseRepositoryInterface } from "../interfaces/urm/BaseRepositoryInterface";
 import createRequest from "../utils/api";
 

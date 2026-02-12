@@ -1,4 +1,4 @@
-import type { BaseModelInterface } from "../../../../base/interfaces/dto/BaseModelInterface";
+import type { BaseModelInterface } from "../../../../../domain/abstractions/dto/BaseModelInterface";
 
 export interface MonsterModel extends BaseModelInterface{ 
     id_num: number;
