@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import type { AxiosInstance, AxiosResponse } from "axios";
 import type { BaseResponseInterface } from "../interfaces/dto/BaseResponseInterface";
 import type { BaseRequestInterface } from "../interfaces/dto/BaseRequestInterface";
+import type { BaseModelInterface } from "../interfaces/dto/BaseModelInterface";
 
 const createAxiosInstance = (
   baseURL: string,
@@ -43,60 +44,81 @@ const createAxiosInstance = (
   return instance;
 };
 
-// this return just status and message, and data if it exists, otherwise trhow an error with response message
-const responseBody = <TEnt>(response: AxiosResponse): BaseResponseInterface<TEnt> => {
+// Simple: recibe AxiosResponse, devuelve BaseResponseInterface<TModel>
+const responseBody = async <
+  TModel extends BaseModelInterface,
+  TResponse extends BaseResponseInterface<TModel>,
+>(
+  response: AxiosResponse,
+): Promise<TResponse> => {
   const status = response.status;
   const message = response.data?.message || "Respuesta del servidor inválida";
-  const data = response.data?.content?.viewModel;
-
-  // if (data as TEnt ) {
-  //   throw new Error(message ?? "Respuesta inválida del servidor");
-  // }
+  const data = response.data?.content?.viewModel as TModel;
 
   return {
     status,
     message,
-    data: data as TEnt,
-  } as BaseResponseInterface<TEnt>;
+    data,
+  } as TResponse;
 };
 
 const createRequest = (baseURL: string, token: string | null) => {
   const axiosInstance = createAxiosInstance(baseURL, token ? token : undefined);
   return {
-    get: <TEnt, TRequest extends BaseRequestInterface>(
+    get: <
+      TModel extends BaseModelInterface,
+      TRequest extends BaseRequestInterface,
+      TResponse extends BaseResponseInterface<TModel>,
+    >(
       request: TRequest,
-    ): Promise<BaseResponseInterface<TEnt>> =>
+    ): Promise<TResponse> =>
       axiosInstance
         .get(request.uri)
-        .then((response) => responseBody<TEnt>(response)),
+        .then((response) => responseBody<TModel, TResponse>(response)),
 
-    post: <TEnt, TRequest extends BaseRequestInterface>(
+    post: <
+      TModel extends BaseModelInterface,
+      TRequest extends BaseRequestInterface,
+      TResponse extends BaseResponseInterface<TModel>,
+    >(
       request: TRequest,
-    ): Promise<BaseResponseInterface<TEnt>> =>
+    ): Promise<TResponse> =>
       axiosInstance
         .post(request.uri, request.body)
-        .then((response) => responseBody<TEnt>(response)),
+        .then((response) => responseBody<TModel, TResponse>(response)),
 
-    put: <TEnt, TRequest extends BaseRequestInterface>(
+    put: <
+      TModel extends BaseModelInterface,
+      TRequest extends BaseRequestInterface,
+      TResponse extends BaseResponseInterface<TModel>,
+    >(
       request: TRequest,
-    ): Promise<BaseResponseInterface<TEnt>> =>
+    ): Promise<TResponse> =>
       axiosInstance
         .put(request.uri, request.body)
-        .then((response) => responseBody<TEnt>(response)),
+        .then((response) => responseBody<TModel, TResponse>(response)),
 
-    patch: <TEnt, TRequest extends BaseRequestInterface>(
+    patch: <
+      TModel extends BaseModelInterface,
+      TRequest extends BaseRequestInterface,
+      TResponse extends BaseResponseInterface<TModel>,
+    >(
       request: TRequest,
-    ): Promise<BaseResponseInterface<TEnt>> =>
+    ): Promise<TResponse> =>
       axiosInstance
         .patch(request.uri, request.body)
-        .then((response) => responseBody<TEnt>(response)),
+        .then((response) => responseBody<TModel, TResponse>(response)),
 
-    delete: <TEnt, TRequest extends BaseRequestInterface>(
+    delete: <
+      TModel extends BaseModelInterface,
+      TRequest extends BaseRequestInterface,
+      TResponse extends BaseResponseInterface<TModel>,
+    >(
       request: TRequest,
-    ): Promise<BaseResponseInterface<TEnt>> =>
+    ): Promise<TResponse> =>
       axiosInstance
         .delete(request.uri)
-        .then((response) => responseBody<TEnt>(response)),
+        .then((response) => responseBody<TModel, TResponse>(response)),
   };
 };
 

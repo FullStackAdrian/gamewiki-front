@@ -5,9 +5,8 @@ import type { BaseRepositoryInterface } from "../interfaces/urm/BaseRepositoryIn
 import createRequest from "../utils/api";
 
 export abstract class BaseRepository<
-  TRequest extends BaseRequestInterface,
   TModel extends BaseModelInterface,
-> implements BaseRepositoryInterface<TRequest, TModel> {
+> implements BaseRepositoryInterface<TModel> {
   // get type for instance in constructor.
   private api: ReturnType<typeof createRequest>;
 
@@ -15,23 +14,38 @@ export abstract class BaseRepository<
     this.api = createRequest(baseURL, token ?? null);
   }
 
-  async create(request: TRequest): Promise<BaseResponseInterface<TModel>> {
-    return this.api.post<TModel, TRequest>(request);
+  async create<
+    TRequest extends BaseRequestInterface,
+    TResponse extends BaseResponseInterface<TModel>,
+  >(request: TRequest): Promise<TResponse> {
+    return this.api.post<TModel, TRequest, TResponse>(request);
   }
 
-  async getById(request: TRequest): Promise<BaseResponseInterface<TModel>> {
-    return this.api.get<TModel, TRequest>(request);
+  async getById<
+    TRequest extends BaseRequestInterface,
+    TResponse extends BaseResponseInterface<TModel>,
+  >(request: TRequest): Promise<TResponse> {
+    return this.api.get<TModel, TRequest, TResponse>(request);
   }
 
-  async getAll(request: TRequest): Promise<BaseResponseInterface<TModel[]>> {
-    return await this.api.get<TModel[], TRequest>(request);
+  async getAll<
+    TRequest extends BaseRequestInterface,
+    TResponse extends BaseResponseInterface<TModel[]>,
+  >(request: TRequest): Promise<TResponse> {
+    return await this.api.get<TModel[], TRequest, TResponse>(request);
   }
 
-  async updateById(request: TRequest): Promise<BaseResponseInterface<TModel>> {
-    return this.api.put<TModel, TRequest>(request);
+  async updateById<
+    TRequest extends BaseRequestInterface,
+    TResponse extends BaseResponseInterface<TModel>,
+  >(request: TRequest): Promise<TResponse> {
+    return this.api.put<TModel, TRequest, TResponse>(request);
   }
 
-  async deleteById(request: TRequest): Promise<BaseResponseInterface<TModel>> {
-    return this.api.delete<TModel, TRequest>(request);
+  async deleteById<
+    TRequest extends BaseRequestInterface,
+    TResponse extends BaseResponseInterface<TModel>,
+  >(request: TRequest): Promise<TResponse> {
+    return this.api.delete<TModel, TRequest, TResponse>(request);
   }
 }

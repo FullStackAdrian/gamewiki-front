@@ -1,14 +1,13 @@
+import type { BaseModelInterface } from "../dto/BaseModelInterface";
 import type { BaseRequestInterface } from "../dto/BaseRequestInterface";
 import type { BaseResponseInterface } from "../dto/BaseResponseInterface";
-import type { BaseEntityInterface } from "./BaseEntityInterface";
 
 export interface BaseMapperInterface<
-  TRequest extends BaseRequestInterface,
-  TEnt extends BaseEntityInterface,
+  TModel extends BaseModelInterface,
 > {
-  entToRequest(ent: TEnt): Promise<TRequest>;
-  responseToEnt(response: BaseResponseInterface<TEnt>): Promise<TEnt>;
-  responseArrayToEntArray(
-    response: BaseResponseInterface<TEnt[]>,
-  ): Promise<TEnt[]>;
+  entToRequest<TRequest extends BaseRequestInterface>(ent: TModel): Promise<TRequest>;
+  responseToEnt<TResponse extends BaseResponseInterface<TModel>>(response: TResponse): Promise<TModel>;
+  responseArrayToEntArray<TResponse extends BaseResponseInterface<TModel[]>>(
+    response: TResponse,
+  ): Promise<TModel[]>;
 }
