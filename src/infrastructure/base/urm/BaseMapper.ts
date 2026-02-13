@@ -5,14 +5,11 @@ import type { BaseMapperInterface } from "../interfaces/urm/BaseMapperInterface"
 
 export abstract class BaseMapper<
   TModel extends BaseModelInterface,
-> implements BaseMapperInterface<TModel> {
-  abstract entToRequest<TRequest extends BaseRequestInterface>(
-    ent: TModel,
-  ): Promise<TRequest>;
-  abstract responseToEnt<TResponse extends BaseResponseInterface<TModel>>(
-    response: TResponse,
-  ): Promise<TModel>;
-  abstract responseArrayToEntArray<
-    TResponse extends BaseResponseInterface<TModel[]>,
-  >(response: TResponse): Promise<TModel[]>;
+  TRequest extends BaseRequestInterface,
+  TResponse extends BaseResponseInterface<TModel>,
+> implements BaseMapperInterface<TModel, TRequest, TResponse> {
+
+  abstract entToRequest(ent: TModel): Promise<TRequest>;
+  abstract responseToEnt(response: TResponse): Promise<TModel>;
+  abstract responseArrayToEntArray(response: TResponse): Promise<TModel[]>;
 }

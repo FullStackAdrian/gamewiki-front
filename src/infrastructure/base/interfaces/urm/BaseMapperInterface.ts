@@ -4,10 +4,12 @@ import type { BaseResponseInterface } from "../../../../domain/abstractions/dto/
 
 export interface BaseMapperInterface<
   TModel extends BaseModelInterface,
+  TRequest extends BaseRequestInterface,
+  TResponse extends BaseResponseInterface<TModel>,
 > {
-  entToRequest<TRequest extends BaseRequestInterface>(ent: TModel): Promise<TRequest>;
-  responseToEnt<TResponse extends BaseResponseInterface<TModel>>(response: TResponse): Promise<TModel>;
-  responseArrayToEntArray<TResponse extends BaseResponseInterface<TModel[]>>(
+  entToRequest(ent: TModel): Promise<TRequest>;
+  responseToEnt(response: TResponse): Promise<TModel>;
+  responseArrayToEntArray(
     response: TResponse,
   ): Promise<TModel[]>;
 }
