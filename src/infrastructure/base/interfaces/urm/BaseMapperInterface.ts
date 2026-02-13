@@ -7,7 +7,7 @@ export interface BaseMapperInterface<
   TRequest extends BaseRequestInterface,
   TResponse extends BaseResponseInterface<TModel>,
 > {
-  entToRequest(ent: TModel): Promise<TRequest>;
+  toRequest(ent?: TModel): Promise<TRequest>;
   responseToEnt(response: TResponse): Promise<TModel>;
   responseArrayToEntArray(
     response: TResponse,

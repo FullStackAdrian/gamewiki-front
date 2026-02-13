@@ -9,7 +9,7 @@ export abstract class BaseMapper<
   TResponse extends BaseResponseInterface<TModel>,
 > implements BaseMapperInterface<TModel, TRequest, TResponse> {
 
-  abstract entToRequest(ent: TModel): Promise<TRequest>;
+  abstract toRequest(ent: TModel): Promise<TRequest>;
   abstract responseToEnt(response: TResponse): Promise<TModel>;
   abstract responseArrayToEntArray(response: TResponse): Promise<TModel[]>;
 }
