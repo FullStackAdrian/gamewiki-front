@@ -5,7 +5,7 @@ import type { BaseResponseInterface } from "../../../../domain/abstractions/dto/
 export interface BaseMapperInterface<
   TModel extends BaseModelInterface,
   TRequest extends BaseRequestInterface,
-  TResponse extends BaseResponseInterface<TModel>,
+  TResponse extends BaseResponseInterface<TModel | TModel[]>,
 > {
   toRequest(ent?: TModel): Promise<TRequest>;
   responseToEnt(response: TResponse): Promise<TModel>;
