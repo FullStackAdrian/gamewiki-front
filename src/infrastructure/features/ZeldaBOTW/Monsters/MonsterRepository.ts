@@ -1,6 +1,6 @@
 import { BaseRepository } from "../../../base/urm/BaseRepository";
 // dtos
-import type { MonsterModel } from "../../../../domain/features/ZeldaBOTW/Monsters/model/MonsterModel";
+import type { MonsterModel } from "../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
 import type { CreateMonsterRequestInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/CreateMonsterRequestInterface";
 import type { CreateMonsterResponseInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/CreateMonsterResponseInterface";
 import type { GetMonsterByIdRequestInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/GetMonsterByIdRequestInterface";

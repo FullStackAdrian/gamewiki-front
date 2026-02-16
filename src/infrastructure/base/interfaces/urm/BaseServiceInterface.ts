@@ -18,7 +18,7 @@ export interface BaseServiceInterface<TModel extends BaseModelInterface> {
     TResponse extends BaseResponseInterface<TModel>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
   >(
-    entity: TModel,
+    id: string,
     mapper: TMapper,
   ): Promise<TModel>;
 
@@ -27,8 +27,7 @@ export interface BaseServiceInterface<TModel extends BaseModelInterface> {
     TResponse extends BaseResponseInterface<TModel[]>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
   >(
-    entity: TModel,
-    mapper: TMapper,
+    mapper: TMapper
   ): Promise<TModel[]>;
 
   updateById<
@@ -45,7 +44,7 @@ export interface BaseServiceInterface<TModel extends BaseModelInterface> {
     TResponse extends BaseResponseInterface<TModel>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
   >(
-    entity: TModel,
+    id: string,
     mapper: TMapper,
   ): Promise<void>;
 }

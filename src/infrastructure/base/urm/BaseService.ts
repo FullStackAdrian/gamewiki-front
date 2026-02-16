@@ -28,20 +28,26 @@ export class BaseService<
     TRequest extends BaseRequestInterface,
     TResponse extends BaseResponseInterface<TModel>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
-  >(entity: TModel, mapper: TMapper): Promise<TModel> {
-    const request = await mapper.toRequest(entity);
+  >(id: string, mapper: TMapper): Promise<TModel> {
+    const request = {
+      uri: `/${id}`,
+    } as TRequest;
+
     const response = await this.repository.getById<TRequest, TResponse>(
       request,
     );
-    return mapper.responseToEnt(response); 
+    return mapper.responseToEnt(response);
   }
 
   async getAll<
     TRequest extends BaseRequestInterface,
     TResponse extends BaseResponseInterface<TModel[]>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
-  >(entity: TModel, mapper: TMapper): Promise<TModel[]> {
-    const request = await mapper.toRequest(entity);
+  >(mapper: TMapper): Promise<TModel[]> {
+    const request = {
+      uri: "/",
+    } as TRequest;
+
     const response = await this.repository.getAll<TRequest, TResponse>(request);
     return mapper.responseArrayToEntArray(response);
   }
@@ -62,8 +68,11 @@ export class BaseService<
     TRequest extends BaseRequestInterface,
     TResponse extends BaseResponseInterface<TModel>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
-  >(entity: TModel, mapper: TMapper): Promise<void> {
-    const request = await mapper.toRequest(entity);
+  >(id: string, mapper: TMapper): Promise<void> {
+    const request = {
+      uri: `/${id}`,
+    } as TRequest;
+
     await this.repository.deleteById<TRequest, TResponse>(request);
   }
 }

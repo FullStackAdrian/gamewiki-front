@@ -1,6 +1,6 @@
 import type { GetAllMonstersRequestInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/GetAllMonstersRequestInterface";
 import type { GetAllMonstersResponseInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/GetAllMonstersResponseInterface";
-import type { MonsterModel } from "../../../../../../domain/features/ZeldaBOTW/Monsters/model/MonsterModel";
+import type { MonsterModel } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
 import { BaseMapper } from "../../../../../base/urm/BaseMapper";
 
 export class GetAllMonsterser extends BaseMapper<
