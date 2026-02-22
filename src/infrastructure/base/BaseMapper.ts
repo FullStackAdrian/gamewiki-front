@@ -1,7 +1,7 @@
-import type { BaseModelInterface } from "../../../domain/abstractions/dto/BaseModelInterface";
-import type { BaseRequestInterface } from "../../../domain/abstractions/dto/BaseRequestInterface";
-import type { BaseResponseInterface } from "../../../domain/abstractions/dto/BaseResponseInterface";
-import type { BaseMapperInterface } from "../interfaces/urm/BaseMapperInterface";
+import type { BaseModelInterface } from "../../domain/abstractions/dto/BaseModelInterface";
+import type { BaseRequestInterface } from "../../domain/abstractions/dto/BaseRequestInterface";
+import type { BaseResponseInterface } from "../../domain/abstractions/dto/BaseResponseInterface";
+import type { BaseMapperInterface } from "../../domain/abstractions/base/BaseMapperInterface";
 
 export abstract class BaseMapper<
   TModel extends BaseModelInterface,

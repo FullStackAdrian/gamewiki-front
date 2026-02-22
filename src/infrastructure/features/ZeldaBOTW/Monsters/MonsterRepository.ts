@@ -1,4 +1,4 @@
-import { BaseRepository } from "../../../base/urm/BaseRepository";
+import { BaseRepository } from "../../../base/BaseRepository";
 // dtos
 import type { MonsterModel } from "../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
 import type { CreateMonsterRequestInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/CreateMonsterRequestInterface";

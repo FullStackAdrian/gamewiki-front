@@ -1,5 +1,5 @@
-import { BaseService } from "../../../base/urm/BaseService";
-import type { MonsterModel } from "../../../../domain/features/ZeldaBOTW/Monsters/model/MonsterModel";
+import { BaseService } from "../../../base/BaseService";
+import type { MonsterModel } from "../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
 import type { MonsterRepository } from "./MonsterRepository";
 
 export class MonsterService extends BaseService<

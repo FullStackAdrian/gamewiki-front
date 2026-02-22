@@ -1,6 +1,6 @@
-import type { BaseModelInterface } from "../../../../domain/abstractions/dto/BaseModelInterface";
-import type { BaseRequestInterface } from "../../../../domain/abstractions/dto/BaseRequestInterface";
-import type { BaseResponseInterface } from "../../../../domain/abstractions/dto/BaseResponseInterface";
+import type { BaseModelInterface } from "../dto/BaseModelInterface";
+import type { BaseRequestInterface } from "../dto/BaseRequestInterface";
+import type { BaseResponseInterface } from "../dto/BaseResponseInterface";
 import type { BaseMapperInterface } from "./BaseMapperInterface";
 
 export interface BaseServiceInterface<TModel extends BaseModelInterface> {

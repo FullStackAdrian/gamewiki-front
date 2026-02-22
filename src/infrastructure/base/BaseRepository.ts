@@ -1,8 +1,8 @@
-import type { BaseRequestInterface } from "../../../domain/abstractions/dto/BaseRequestInterface";
-import type { BaseResponseInterface } from "../../../domain/abstractions/dto/BaseResponseInterface";
-import type { BaseModelInterface } from "../../../domain/abstractions/dto/BaseModelInterface";
-import type { BaseRepositoryInterface } from "../interfaces/urm/BaseRepositoryInterface";
-import createRequest from "../utils/api";
+import type { BaseRequestInterface } from "../../domain/abstractions/dto/BaseRequestInterface";
+import type { BaseResponseInterface } from "../../domain/abstractions/dto/BaseResponseInterface";
+import type { BaseModelInterface } from "../../domain/abstractions/dto/BaseModelInterface";
+import type { BaseRepositoryInterface } from "../../domain/abstractions/base/BaseRepositoryInterface";
+import createRequest from "./utils/api";
 
 export abstract class BaseRepository<
   TModel extends BaseModelInterface,
