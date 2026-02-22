@@ -1,6 +1,12 @@
 import { BaseService } from "../../../base/BaseService";
 import type { MonsterModel } from "../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
-import type { MonsterRepository } from "./MonsterRepository";
+import type { MonsterRepositoryInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/MonsterRepositoryInterface";
+// mappers
+import { CreateMonsterMapper } from "./rules/mappers/CreateMonsterMapper";
+import { GetMonsterMapper } from "./rules/mappers/GetMonsterMapper";
+import { GetAllMonsterser } from "./rules/mappers/GetAllMonstersMapper";
+import { UpdateMonsterMapper } from "./rules/mappers/UpdateMonsterMapper";
+import { DeleteMonsterMapper } from "./rules/mappers/DeleteMonsterMapper";
 
 export class MonsterService extends BaseService<
   MonsterModel,
