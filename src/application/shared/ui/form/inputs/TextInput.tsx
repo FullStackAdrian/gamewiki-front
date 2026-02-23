@@ -1,4 +1,9 @@
-import type { FieldValues, UseFormRegister, FieldErrors, Path } from "react-hook-form";
+import type {
+  FieldValues,
+  UseFormRegister,
+  FieldErrors,
+  Path,
+} from "react-hook-form";
 
 interface TextInputProps<TFormValues extends FieldValues> {
   label: string;
@@ -15,7 +20,7 @@ function TextInput<TFormValues extends FieldValues>({
   errors,
   placeholder = "",
 }: TextInputProps<TFormValues>) {
-  const errorMessage = errors?.[name]?.message as string | undefined ;
+  const errorMessage = errors?.[name]?.message as string | undefined;
 
   return (
     <div className="space-y-4">
