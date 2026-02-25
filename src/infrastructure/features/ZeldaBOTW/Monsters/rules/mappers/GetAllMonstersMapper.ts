@@ -9,10 +9,10 @@ export class GetAllMonsterser extends BaseMapper<
   GetAllMonstersResponseInterface
 > {
   async toRequest(
-    ent: MonsterModelInterface
+    ent: MonsterModelInterface,
   ): Promise<GetAllMonstersRequestInterface> {
     const request = {
-      uri: `/${ent.id_num}`,
+      uri: `/monsters`,
     } as GetAllMonstersRequestInterface;
 
     return request;
@@ -21,7 +21,8 @@ export class GetAllMonsterser extends BaseMapper<
     response: GetAllMonstersResponseInterface,
   ): Promise<MonsterModelInterface> {
     throw new Error(
-      "No need to use this method in  getAll by id sest type." + response.message,
+      "No need to use this method in  getAll by id sest type." +
+        response.message,
     );
   }
 

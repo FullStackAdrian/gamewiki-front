@@ -1,9 +1,8 @@
 import React, { useMemo } from "react";
-import { useMonsterHook } from "./useMonsterHook";
 import { MonsterUsecase } from "../MonsterUsecase";
 import { MonsterService } from "../MonsterService";
-
-import { MonsterRepository } from "../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
+import useMonsterHook from "../hooks/useMonsterHook";
+import { MonsterRepository } from "../../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
 
 const MonstersView: React.FC = () => {
   const monsterRepository = useMemo(() => new MonsterRepository(), []);

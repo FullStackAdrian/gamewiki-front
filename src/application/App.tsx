@@ -1,13 +1,13 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./shared/layouts/MainLayout";
+import MonstersView from "./features/ZeldaBOTW/Monsters/views/MonstersView";
 
 function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-          {
-          /* implementation example 
+    <BrowserRouter>
+      <Routes>
+        {/* implementation example 
            <Route
             path="/login"
             element={
@@ -28,8 +28,16 @@ function App() {
           />
 
           <Route path="*" element={<Navigate to="/" replace />} /> */}
-        </Routes>
-      </BrowserRouter>
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <MonstersView />
+            </MainLayout>
+          }
+        ></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

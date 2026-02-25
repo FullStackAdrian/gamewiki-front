@@ -13,8 +13,8 @@ import type { DeleteMonsterByIdRequestInterface } from "../../../../domain/featu
 import type { DeleteMonsterByIdResponseInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/DeleteMonsterByIdResponseInterface";
 
 export class MonsterRepository extends BaseRepository<MonsterModelInterface> {
-  constructor(baseURL: string, token?: string | null) {
-    super(baseURL, token);
+  constructor() {
+    super("http://localhost:3001", null);
   }
 
   async createMonster(request: CreateMonsterRequestInterface) {

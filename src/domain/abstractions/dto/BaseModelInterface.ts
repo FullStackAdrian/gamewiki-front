@@ -1,6 +1,3 @@
-export interface BaseModelInterface {   
-
-    // this is a formalism
-
+export interface BaseModelInterface {
+  id: number;
 }
-

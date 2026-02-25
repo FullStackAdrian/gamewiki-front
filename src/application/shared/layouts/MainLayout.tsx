@@ -14,9 +14,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">T</span>
             </div>
-            <span className="text-white font-semibold text-lg">
-              TASKMANAGER
-            </span>
+            <span className="text-white font-semibold text-lg">Game Wiki</span>
           </div>
           <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
             <svg
