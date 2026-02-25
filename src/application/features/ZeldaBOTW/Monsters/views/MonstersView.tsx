@@ -30,7 +30,7 @@ const MonstersView: React.FC = () => {
       <h1>Monstruos de Zelda BOTW</h1>
       <ul>
         {monsters.map((monster) => (
-          <li key={monster.id}>{monster.name}</li>
+          <li key={monster.id_num}>{monster.name}</li>
         ))}
       </ul>
     </div>

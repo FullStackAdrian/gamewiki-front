@@ -21,28 +21,28 @@ export class MonsterService
     entity: MonsterModelInterface,
   ): Promise<MonsterModelInterface> {
     const mapper = new CreateMonsterMapper();
-    return super.create(entity, mapper);
+    return await super.create(entity, mapper);
   }
 
   async getMonsterById(id: string): Promise<MonsterModelInterface> {
     const mapper = new GetMonsterMapper();
-    return super.getById(id, mapper);
+    return await super.getById(id, mapper);
   }
 
   async getAllMonsters(): Promise<MonsterModelInterface[]> {
     const mapper = new GetAllMonsterser();
-    return super.getAll(mapper);
+    return await super.getAll(mapper);
   }
 
   async updateMonster(
     entity: MonsterModelInterface,
   ): Promise<MonsterModelInterface> {
     const mapper = new UpdateMonsterMapper();
-    return super.updateById(entity, mapper);
+    return await super.updateById(entity, mapper);
   }
 
   async deleteMonster(id: string): Promise<void> {
     const mapper = new DeleteMonsterMapper();
-    return super.deleteById(id, mapper);
+    return await super.deleteById(id, mapper);
   }
 }

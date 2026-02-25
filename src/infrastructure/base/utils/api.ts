@@ -53,8 +53,8 @@ const responseBody = async <
 ): Promise<TResponse> => {
   const status = response.status;
   const message = response.data?.message || "Respuesta del servidor inválida";
-  const data = response.data?.content?.viewModel as TModel;
-
+  const data = response.data as TModel;
+  
   return {
     status,
     message,

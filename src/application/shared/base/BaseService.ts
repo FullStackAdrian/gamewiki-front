@@ -44,10 +44,7 @@ export class BaseService<
     TResponse extends BaseResponseInterface<TModel[]>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
   >(mapper: TMapper): Promise<TModel[]> {
-    const request = {
-      uri: "/",
-    } as TRequest;
-
+    const request = await mapper.toRequest();
     const response = await this.repository.getAll<TRequest, TResponse>(request);
     return mapper.responseArrayToEntArray(response);
   }

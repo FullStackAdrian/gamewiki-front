@@ -10,22 +10,22 @@ export class MonsterUsecase implements MonsterUsecaseInterface {
   }
 
   async createMonster(entity: MonsterModelInterface): Promise<MonsterModelInterface> {
-    return this.monsterService.createMonster(entity);
+    return  await this.monsterService.createMonster(entity);
   }
 
   async getMonsterById(id: string): Promise<MonsterModelInterface> {
-    return this.monsterService.getMonsterById(id);
+    return  await this.monsterService.getMonsterById(id);
   }
 
   async getAllMonsters(): Promise<MonsterModelInterface[]> {
-    return this.monsterService.getAllMonsters();
+    return  await this.monsterService.getAllMonsters();
   }
 
   async updateMonster(entity: MonsterModelInterface): Promise<MonsterModelInterface> {
-    return this.monsterService.updateMonster(entity);
+    return  await this.monsterService.updateMonster(entity);
   }
 
   async deleteMonster(id: string): Promise<void> {
-    return this.monsterService.deleteMonster(id);
+    return  await this.monsterService.deleteMonster(id);
   }
 }
