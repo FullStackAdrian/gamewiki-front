@@ -1,15 +1,15 @@
 import type { GetAllMonstersRequestInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/GetAllMonstersRequestInterface";
 import type { GetAllMonstersResponseInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/GetAllMonstersResponseInterface";
-import type { MonsterModel } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
-import { BaseMapper } from "../../../../../base/urm/BaseMapper";
+import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
+import { BaseMapper } from "../../../../../base/BaseMapper";
 
 export class GetAllMonsterser extends BaseMapper<
-  MonsterModel,
+  MonsterModelInterface,
   GetAllMonstersRequestInterface,
   GetAllMonstersResponseInterface
 > {
   async toRequest(
-    ent: MonsterModel
+    ent: MonsterModelInterface
   ): Promise<GetAllMonstersRequestInterface> {
     const request = {
       uri: `/${ent.id_num}`,
@@ -19,7 +19,7 @@ export class GetAllMonsterser extends BaseMapper<
   }
   async responseToEnt(
     response: GetAllMonstersResponseInterface,
-  ): Promise<MonsterModel> {
+  ): Promise<MonsterModelInterface> {
     throw new Error(
       "No need to use this method in  getAll by id sest type." + response.message,
     );
@@ -30,7 +30,7 @@ export class GetAllMonsterser extends BaseMapper<
   // maybe creating every base type mapper is the best solution.
   async responseArrayToEntArray(
     response: GetAllMonstersResponseInterface,
-  ): Promise<MonsterModel[]> {
+  ): Promise<MonsterModelInterface[]> {
     return response.data;
   }
 }

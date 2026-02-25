@@ -1,10 +1,10 @@
 import type { BaseServiceInterface } from "./../../../abstractions/base/BaseServiceInterface";
-import type { MonsterModel } from "./MonsterModel";
+import type { MonsterModelInterface } from "./MonsterModelInterface";
 
-export interface MonsterServiceInterface extends BaseServiceInterface<MonsterModel> {
-  createMonster(entity: MonsterModel): Promise<MonsterModel>;
-  getMonsterById(id: string): Promise<MonsterModel>;
-  getAllMonsters(): Promise<MonsterModel[]>;
-  updateMonster(entity: MonsterModel): Promise<MonsterModel>;
+export interface MonsterServiceInterface extends BaseServiceInterface<MonsterModelInterface> {
+  createMonster(entity: MonsterModelInterface): Promise<MonsterModelInterface>;
+  getMonsterById(id: string): Promise<MonsterModelInterface>;
+  getAllMonsters(): Promise<MonsterModelInterface[]>;
+  updateMonster(entity: MonsterModelInterface): Promise<MonsterModelInterface>;
   deleteMonster(id: string): Promise<void>;
 }

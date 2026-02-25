@@ -1,15 +1,15 @@
 import type { DeleteMonsterByIdRequestInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/DeleteMonsterByIdRequestInterface";
 import type { DeleteMonsterByIdResponseInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/DeleteMonsterByIdResponseInterface";
-import type { MonsterModel } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
-import { BaseMapper } from "../../../../../base/urm/BaseMapper";
+import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
+import { BaseMapper } from "../../../../../base/BaseMapper";
 
 export class DeleteMonsterMapper extends BaseMapper<
-  MonsterModel,
+  MonsterModelInterface,
   DeleteMonsterByIdRequestInterface,
   DeleteMonsterByIdResponseInterface
 > {
   async toRequest(
-    ent: MonsterModel,
+    ent: MonsterModelInterface,
   ): Promise<DeleteMonsterByIdRequestInterface> {
     const request = {
       uri: `/${ent.id_num}`,
@@ -19,7 +19,7 @@ export class DeleteMonsterMapper extends BaseMapper<
   }
   async responseToEnt(
     response: DeleteMonsterByIdResponseInterface,
-  ): Promise<MonsterModel> {
+  ): Promise<MonsterModelInterface> {
     throw new Error(
       "No need to use this method in  Delete by id request type." + response.message,
     );
@@ -30,7 +30,7 @@ export class DeleteMonsterMapper extends BaseMapper<
   // maybe creating every base type mapper is the best solution.
   async responseArrayToEntArray(
     response: DeleteMonsterByIdResponseInterface,
-  ): Promise<MonsterModel[]> {
+  ): Promise<MonsterModelInterface[]> {
     throw new Error(
       "No need to use this method in  Delete by id request type." +
         response.message,

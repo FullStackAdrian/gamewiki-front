@@ -1,6 +1,6 @@
 import { BaseRepository } from "../../../base/BaseRepository";
 // dtos
-import type { MonsterModel } from "../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
+import type { MonsterModelInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
 import type { CreateMonsterRequestInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/CreateMonsterRequestInterface";
 import type { CreateMonsterResponseInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/CreateMonsterResponseInterface";
 import type { GetMonsterByIdRequestInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/GetMonsterByIdRequestInterface";
@@ -12,7 +12,7 @@ import type { UpdateMonsterByIdResponseInterface } from "../../../../domain/feat
 import type { DeleteMonsterByIdRequestInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/DeleteMonsterByIdRequestInterface";
 import type { DeleteMonsterByIdResponseInterface } from "../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/DeleteMonsterByIdResponseInterface";
 
-export class MonsterRepository extends BaseRepository<MonsterModel> {
+export class MonsterRepository extends BaseRepository<MonsterModelInterface> {
   constructor(baseURL: string, token?: string | null) {
     super(baseURL, token);
   }

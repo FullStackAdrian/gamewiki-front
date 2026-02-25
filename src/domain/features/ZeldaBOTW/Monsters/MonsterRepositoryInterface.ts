@@ -1,6 +1,6 @@
 import type { BaseRepositoryInterface } from "./../../../abstractions/base/BaseRepositoryInterface";
-import type { MonsterModel } from "./MonsterModel";
+import type { MonsterModelInterface } from "./MonsterModelInterface";
 
-export interface MonsterRepositoryInterface extends BaseRepositoryInterface<MonsterModel> {
+export interface MonsterRepositoryInterface extends BaseRepositoryInterface<MonsterModelInterface> {
   // All methods (create, getById, etc.) are now INHERITED from BaseRepositoryInterface<MonsterModel>.
 }

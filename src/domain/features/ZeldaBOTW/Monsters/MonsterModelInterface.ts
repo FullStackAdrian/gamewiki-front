@@ -1,6 +1,6 @@
 import type { BaseModelInterface } from "../../../abstractions/dto/BaseModelInterface";
 
-export interface MonsterModel extends BaseModelInterface{ 
+export interface MonsterModelInterface extends BaseModelInterface{ 
     id_num: number;
     name: string;
     category: string;

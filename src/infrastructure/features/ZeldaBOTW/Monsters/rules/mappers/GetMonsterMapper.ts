@@ -1,15 +1,15 @@
 import type { GetMonsterByIdRequestInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/requests/GetMonsterByIdRequestInterface";
 import type { GetMonsterByIdResponseInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/dto/responses/GetMonsterByIdResponseInterface";
-import type { MonsterModel } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModel";
-import { BaseMapper } from "../../../../../base/urm/BaseMapper";
+import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
+import { BaseMapper } from "../../../../../base/BaseMapper";
 
 export class GetMonsterMapper extends BaseMapper<
-  MonsterModel,
+  MonsterModelInterface,
   GetMonsterByIdRequestInterface,
   GetMonsterByIdResponseInterface
 > {
   async toRequest(
-    ent: MonsterModel
+    ent: MonsterModelInterface
   ): Promise<GetMonsterByIdRequestInterface> {
     const request = {
       uri: `/${ent.id_num}`,
@@ -19,7 +19,7 @@ export class GetMonsterMapper extends BaseMapper<
   }
   async responseToEnt(
     response: GetMonsterByIdResponseInterface,
-  ): Promise<MonsterModel> {
+  ): Promise<MonsterModelInterface> {
     return response.data;
   }
 
@@ -28,7 +28,7 @@ export class GetMonsterMapper extends BaseMapper<
   // maybe creating every base type mapper is the best solution.
   async responseArrayToEntArray(
     response: GetMonsterByIdResponseInterface,
-  ): Promise<MonsterModel[]> {
+  ): Promise<MonsterModelInterface[]> {
     throw new Error(
       "No need to use this method in  get by id request type." + response.message,
     );
