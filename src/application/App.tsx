@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import MainLayout from "./shared/layouts/MainLayout";
+import MainLayout from "./shared/components/layouts/MainLayout";
 import MonstersView from "./features/ZeldaBOTW/Monsters/views/MonstersView";
 
 function App() {
