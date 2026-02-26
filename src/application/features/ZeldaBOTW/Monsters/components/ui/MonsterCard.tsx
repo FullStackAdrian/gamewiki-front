@@ -1,4 +1,5 @@
 import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
+import { Card } from "../../../../../shared/components/ui/Card";
 
 interface MonsterCardProps {
   monster: MonsterModelInterface;
@@ -7,10 +8,7 @@ interface MonsterCardProps {
 
 export function MonsterCard({ monster, onClick }: MonsterCardProps) {
   return (
-    <div
-      onClick={onClick}
-      className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 p-6 cursor-pointer hover:scale-105 transform"
-    >
+    <Card>  
       <div className="mb-4 overflow-hidden rounded-lg h-48">
         <img
           src={monster.image}
@@ -19,7 +17,7 @@ export function MonsterCard({ monster, onClick }: MonsterCardProps) {
         />
       </div>
 
-      <h3 className="font-bold text-lg mb-2">{monster.name}</h3>
+      <h3 className="font-bold text-blue-950 text-lg mb-2">{monster.name}</h3>
       <p className="text-gray-600 text-sm mb-4">{monster.description}</p>
 
       <div className="flex justify-between items-center">
@@ -27,6 +25,6 @@ export function MonsterCard({ monster, onClick }: MonsterCardProps) {
           {monster.category}
         </span>
       </div>
-    </div>
+    </Card>
   );
 }
