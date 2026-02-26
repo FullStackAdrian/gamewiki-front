@@ -17,9 +17,9 @@ const MonstersContainer: React.FC = () => {
     [monsterService],
   );
 
-  const { monsters, loading, error } = useMonsterHook(monsterUsecase);
+  const { monsters, isLoading, error } = useMonsterHook(monsterUsecase);
 
-  if (loading) {
+  if (isLoading) {
     return <Loading message="Cargando monstruos..." />;
   }
 
