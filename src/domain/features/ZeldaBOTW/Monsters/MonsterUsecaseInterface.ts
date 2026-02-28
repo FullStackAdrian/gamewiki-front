@@ -1,9 +1,9 @@
-import type { MonsterModel } from "./MonsterModel";
+import type { MonsterModelInterface } from "./MonsterModelInterface";
 
 export interface MonsterUsecaseInterface {
-  createMonster(entity: MonsterModel): Promise<MonsterModel>;
-  getMonsterById(id: string): Promise<MonsterModel>;
-  getAllMonsters(): Promise<MonsterModel[]>;
-  updateMonster(entity: MonsterModel): Promise<MonsterModel>;
+  createMonster(entity: MonsterModelInterface): Promise<MonsterModelInterface>;
+  getMonsterById(id: string): Promise<MonsterModelInterface>;
+  getAllMonsters(): Promise<MonsterModelInterface[]>;
+  updateMonster(entity: MonsterModelInterface): Promise<MonsterModelInterface>;
   deleteMonster(id: string): Promise<void>;
 }

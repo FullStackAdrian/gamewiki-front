@@ -8,7 +8,7 @@ interface MonsterCardProps {
 
 export function MonsterCard({ monster, onClick }: MonsterCardProps) {
   return (
-    <Card>  
+    <Card onClick={onClick}>  
       <div className="mb-4 overflow-hidden rounded-lg h-48">
         <img
           src={monster.image}
