@@ -1,26 +1,26 @@
-export interface ButtonProps {
+export interface GenericButtonProps {
   text: string;
   onClick?: () => void;
   variant?: "primary" | "success" | "danger" | "warning" | "secondary";
 }
 
-function Button({ text, onClick, variant = "primary" }: ButtonProps) {
+function GenericButton({ text, onClick, variant = "primary" }: GenericButtonProps) {
   const variants = {
     primary: "bg-blue-600 hover:bg-blue-700",
     success: "bg-green-600 hover:bg-green-700",
     danger: "bg-red-600 hover:bg-red-700",
     warning: "bg-yellow-600 hover:bg-yellow-600",
-    secondary: "bg-slate-700 hover:bg-slate-600",
+    secondary: "bg-gray-600 hover:bg-gray-700",
   };
 
   return (
     <button
       onClick={onClick}
-      className={`w-full ${variants[variant]} text-white font-medium py-2.5 px-4 rounded-lg transition-colors`}
+      className={`${variants[variant]} text-white font-medium rounded-lg px-4 py-2  mb-6 transition-colors`}
     >
       {text}
     </button>
   );
 }
 
-export default Button;
+export default GenericButton;

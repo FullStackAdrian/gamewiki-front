@@ -2,9 +2,9 @@ import React, { useMemo } from "react";
 import { MonsterRepository } from "../../../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
 import { MonsterUsecase } from "../../MonsterUsecase";
 import { MonsterService } from "../../MonsterService";
-import useMonstersHook from "../../hooks/useMonstersHook";
 import { Loading } from "../../../../../shared/components/common/Loading";
 import { MonsterCard } from "../ui/MonsterCard";
+import useMonstersHook from "../../hooks/useMonstersHook";
 
 const MonstersContainer: React.FC = () => {
   const monsterRepository = useMemo(() => new MonsterRepository(), []);
@@ -17,7 +17,7 @@ const MonstersContainer: React.FC = () => {
     [monsterService],
   );
 
-  const { monsters, isLoading, error } = useMonstersHook(monsterUsecase);
+  const { monsters, isLoading, error, handleSelectMonster } = useMonstersHook(monsterUsecase);
 
   if (isLoading) {
     return <Loading message="Cargando monstruos..." />;
@@ -30,7 +30,11 @@ const MonstersContainer: React.FC = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {monsters.map((monster) => (
-        <MonsterCard key={monster.id_num} monster={monster} />
+        <MonsterCard 
+          key={monster.id_num} 
+          monster={monster}
+          onClick={() => handleSelectMonster(monster)}
+        />
       ))}
     </div>
   );

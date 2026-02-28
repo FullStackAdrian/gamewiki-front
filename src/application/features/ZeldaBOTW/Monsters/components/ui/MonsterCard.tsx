@@ -1,5 +1,5 @@
 import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
-import { Card } from "../../../../../shared/components/ui/Card";
+import { Card } from "../../../../../shared/components/ui/cards/Card";
 
 interface MonsterCardProps {
   monster: MonsterModelInterface;
