@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { MonsterRepository } from "../../../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
 import { MonsterUsecase } from "../../MonsterUsecase";
 import { MonsterService } from "../../MonsterService";
-import useMonsterHook from "../../hooks/useMonsterHook";
+import useMonstersHook from "../../hooks/useMonstersHook";
 import { Loading } from "../../../../../shared/components/common/Loading";
 import { MonsterCard } from "../ui/MonsterCard";
 
@@ -17,7 +17,7 @@ const MonstersContainer: React.FC = () => {
     [monsterService],
   );
 
-  const { monsters, isLoading, error } = useMonsterHook(monsterUsecase);
+  const { monsters, isLoading, error } = useMonstersHook(monsterUsecase);
 
   if (isLoading) {
     return <Loading message="Cargando monstruos..." />;

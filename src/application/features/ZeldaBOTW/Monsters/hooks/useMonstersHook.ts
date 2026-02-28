@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import useLoading from "../../../../shared/hooks/useLoading";
 import type { MonsterUsecaseInterface } from "../../../../../domain/features/ZeldaBOTW/Monsters/MonsterUsecaseInterface";
 import type { MonsterModelInterface } from "../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
-import useLoading from "../../../../shared/hooks/useLoading";
 
-const useMonsterHook = (monsterUsecase: MonsterUsecaseInterface) => {
+const useMonstersHook = (monsterUsecase: MonsterUsecaseInterface) => {
   const [monsters, setMonsters] = useState<MonsterModelInterface[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isLoading, startLoading, stopLoading } = useLoading();
@@ -27,4 +27,4 @@ const useMonsterHook = (monsterUsecase: MonsterUsecaseInterface) => {
   return { monsters, isLoading, error };
 };
 
-export default useMonsterHook;
+export default useMonstersHook;
