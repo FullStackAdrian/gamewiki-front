@@ -1,6 +1,8 @@
+import type { MouseEvent } from "react"; 
+
 export interface GenericButtonProps {
   text: string;
-  onClick?: () => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void; 
   variant?: "primary" | "success" | "danger" | "warning" | "secondary";
 }
 

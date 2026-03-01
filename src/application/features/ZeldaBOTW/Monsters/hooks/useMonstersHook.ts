@@ -31,7 +31,20 @@ const useMonstersHook = (monsterUsecase: MonsterUsecaseInterface) => {
     navigate("/monster", { state: { monster } });
   };
 
-  return { monsters, isLoading, error, handleSelectMonster };
+  const deleteMonster = async (id: number) => {
+    try {
+      startLoading();
+      await monsterUsecase.deleteMonster(id.toString());
+      setMonsters(monsters.filter((monster) => monster.id_num !== id));
+      stopLoading();
+    } catch (err) {
+      stopLoading();
+      setError((err as Error).message);
+    }
+  };
+
+  return { monsters, isLoading, error, handleSelectMonster, deleteMonster };
 };
 
 export default useMonstersHook;
+

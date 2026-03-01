@@ -2,9 +2,11 @@ import React, { useMemo } from "react";
 import { MonsterRepository } from "../../../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
 import { MonsterUsecase } from "../../MonsterUsecase";
 import { MonsterService } from "../../MonsterService";
+import useMonstersHook from "../../hooks/useMonstersHook";
+// ui components
 import { Loading } from "../../../../../shared/components/common/Loading";
 import { MonsterCard } from "../ui/MonsterCard";
-import useMonstersHook from "../../hooks/useMonstersHook";
+
 
 const MonstersContainer: React.FC = () => {
   const monsterRepository = useMemo(() => new MonsterRepository(), []);
@@ -17,7 +19,7 @@ const MonstersContainer: React.FC = () => {
     [monsterService],
   );
 
-  const { monsters, isLoading, error, handleSelectMonster } = useMonstersHook(monsterUsecase);
+  const { monsters, handleSelectMonster, deleteMonster, isLoading, error, } = useMonstersHook(monsterUsecase);
 
   if (isLoading) {
     return <Loading message="Cargando monstruos..." />;
@@ -34,6 +36,7 @@ const MonstersContainer: React.FC = () => {
           key={monster.id_num} 
           monster={monster}
           onClick={() => handleSelectMonster(monster)}
+          onClickDelete={ async () =>  await deleteMonster(monster.id_num)}
         />
       ))}
     </div>
