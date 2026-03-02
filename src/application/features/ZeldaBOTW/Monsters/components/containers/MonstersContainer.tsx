@@ -16,7 +16,7 @@ const MonstersContainer: React.FC = () => {
   );
   const monsterUsecase = useMemo(
     () => new MonsterUsecase(monsterService),
-    [monsterService],
+    [monsterService], 
   );
 
   const { monsters, handleSelectMonster, deleteMonster, isLoading, error, } = useMonstersHook(monsterUsecase);

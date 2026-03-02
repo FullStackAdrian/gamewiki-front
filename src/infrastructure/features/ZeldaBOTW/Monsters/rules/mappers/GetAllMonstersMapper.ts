@@ -9,14 +9,23 @@ export class GetAllMonsterser extends BaseMapper<
   GetAllMonstersResponseInterface
 > {
   async toRequest(
-    ent: MonsterModelInterface,
+    param?: MonsterModelInterface | string | undefined,
   ): Promise<GetAllMonstersRequestInterface> {
-    const request = {
-      uri: `/monsters`,
-    } as GetAllMonstersRequestInterface;
-
-    return request;
+    if (typeof param === "string") {
+      throw new Error(
+        "GetAllMonstersMapper do not support id for toRequest. Use undefined",
+      );
+      // Compare if not undefined is MonsterModelInterface so
+    } else if (param !== undefined) {
+      throw new Error("GetAllMonstersMapper do not support entity for toRequest."); 
+    } else {
+      const request = {
+        uri: `/monsters`,
+      } as GetAllMonstersRequestInterface;
+      return request;
+    }
   }
+
   async responseToEnt(
     response: GetAllMonstersResponseInterface,
   ): Promise<MonsterModelInterface> {

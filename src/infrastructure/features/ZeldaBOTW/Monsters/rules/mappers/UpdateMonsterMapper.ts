@@ -9,16 +9,28 @@ export class UpdateMonsterMapper extends BaseMapper<
   UpdateMonsterByIdResponseInterface
 > {
   async toRequest(
-    ent: MonsterModelInterface
+    param: MonsterModelInterface | string | undefined,
   ): Promise<UpdateMonsterByIdRequestInterface> {
-    const JSONent: JSON = JSON.parse(JSON.stringify(ent));
-    const request = {
-      uri: `/${ent.id_num}`,
-      body: JSONent
-    } as UpdateMonsterByIdRequestInterface;
+    if (typeof param === "string") {
+      throw new Error(
+        "UpdateMonsterMapper toRequest do not suport just and id, it requires a full ent.",
+      );
+    } else if (param === undefined) {
+      throw new Error(
+        "UpdateMonsterMapper toRequest can not have undefined parameter, it requires a full ent.",
+      );
+    } else {
+      const ent = param as MonsterModelInterface;
+      const requestBody = JSON.parse(JSON.stringify(ent));
+      const request = {
+        uri: `/monster/${ent.id_num}`,
+        body: requestBody,
+      } as UpdateMonsterByIdRequestInterface;
 
-    return request;
+      return request;
+    }
   }
+
   async responseToEnt(
     response: UpdateMonsterByIdResponseInterface,
   ): Promise<MonsterModelInterface> {
@@ -32,7 +44,8 @@ export class UpdateMonsterMapper extends BaseMapper<
     response: UpdateMonsterByIdResponseInterface,
   ): Promise<MonsterModelInterface[]> {
     throw new Error(
-      "No need to use this method in  Update by id request type." + response.message,
+      "No need to use this method in  Update by id request type." +
+        response.message,
     );
   }
 }

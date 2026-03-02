@@ -9,13 +9,22 @@ export class GetMonsterMapper extends BaseMapper<
   GetMonsterByIdResponseInterface
 > {
   async toRequest(
-    ent: MonsterModelInterface
+    param: MonsterModelInterface | string | undefined,
   ): Promise<GetMonsterByIdRequestInterface> {
-    const request = {
-      uri: `/${ent.id_num}`,
-    } as GetMonsterByIdRequestInterface;
-
-    return request;
+    if (typeof param === "string") {
+      const request = {
+        uri: `/monster/${param}`,
+      } as GetMonsterByIdRequestInterface;
+      return request;
+    } else if (param !== undefined) {
+      throw new Error(
+        "GetMonsterMapper toRequest do not suport a full entity. It requires an id. ",
+      );
+    } else {
+      throw new Error(
+        "GetMonsterMapper toRequest can not have undefined param, request requires id.",
+      );
+    }
   }
   async responseToEnt(
     response: GetMonsterByIdResponseInterface,
@@ -30,7 +39,8 @@ export class GetMonsterMapper extends BaseMapper<
     response: GetMonsterByIdResponseInterface,
   ): Promise<MonsterModelInterface[]> {
     throw new Error(
-      "No need to use this method in  get by id request type." + response.message,
+      "No need to use this method in  get by id request type." +
+        response.message,
     );
   }
 }

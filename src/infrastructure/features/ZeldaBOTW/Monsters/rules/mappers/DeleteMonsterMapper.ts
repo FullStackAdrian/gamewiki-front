@@ -8,15 +8,25 @@ export class DeleteMonsterMapper extends BaseMapper<
   DeleteMonsterByIdRequestInterface,
   DeleteMonsterByIdResponseInterface
 > {
-  async toRequest(
-    ent: MonsterModelInterface,
+    async toRequest(
+    param: MonsterModelInterface | string | undefined 
   ): Promise<DeleteMonsterByIdRequestInterface> {
-    const request = {
-      uri: `/${ent.id_num}`,
-    } as DeleteMonsterByIdRequestInterface;
-
-    return request;
+    if (typeof param === 'string') {
+      const request = {
+        uri: `/monsters/${param}`,
+      } as DeleteMonsterByIdRequestInterface;
+      return request;
+    } else if (param !== undefined) {
+      throw new Error(
+        "DeleteMonsterMapper solo soporta la eliminación por ID. No se acepta una entidad completa.",
+      );
+    } else {
+      throw new Error(
+        "Invalid parameters provided to toRequest. Se requiere un ID.",
+      );
+    }
   }
+
   async responseToEnt(
     response: DeleteMonsterByIdResponseInterface,
   ): Promise<MonsterModelInterface> {

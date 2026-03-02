@@ -9,16 +9,28 @@ export class CreateMonsterMapper extends BaseMapper<
   CreateMonsterResponseInterface
 > {
   async toRequest(
-    ent: MonsterModelInterface,
+    param: MonsterModelInterface | string | undefined,
   ): Promise<CreateMonsterRequestInterface> {
-    const JSONent: JSON = JSON.parse(JSON.stringify(ent));
-    const request = {
-      uri: "/",
-      body: JSONent,
-    } as CreateMonsterRequestInterface;
+    if (typeof param === "string") {
+      throw new Error(
+        "CreateMonsterMapper toRequest do not suport Id, it only suport a complete entity of type MonsterModelInterface.",
+      );
+    } else if (param === undefined) {
+      throw new Error(
+        "CreateMonsterMapper toRequest can not be undefined param, it requires an entity for creation.",
+      );
+    } else {
+      const ent = param as MonsterModelInterface;
+      const requestBody = JSON.parse(JSON.stringify(ent));
+      const request = {
+        uri: "/monsters/",
+        body: requestBody,
+      } as CreateMonsterRequestInterface;
 
-    return request;
+      return request;
+    }
   }
+
   async responseToEnt(
     response: CreateMonsterResponseInterface,
   ): Promise<MonsterModelInterface> {
@@ -31,6 +43,8 @@ export class CreateMonsterMapper extends BaseMapper<
   async responseArrayToEntArray(
     response: CreateMonsterResponseInterface,
   ): Promise<MonsterModelInterface[]> {
-    throw new Error("No need to use this method in  create request type." + response.message);
+    throw new Error(
+      "No need to use this method in  create request type." + response.message,
+    );
   }
 }
