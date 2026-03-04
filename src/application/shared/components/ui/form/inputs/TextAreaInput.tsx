@@ -14,6 +14,7 @@ export interface TextAreaInputProps<
   errors?: FieldErrors<TFieldValues>;
   rows?: number;
   placeholder?: string;
+  helpText?: string;
   className?: string;
 }
 
@@ -24,6 +25,7 @@ export function TextAreaInput<TFieldValues extends FieldValues = FieldValues>({
   errors,
   rows = 4,
   placeholder = "",
+  helpText,
   className = "",
 }: TextAreaInputProps<TFieldValues>) {
   const error = errors?.[name];
@@ -46,6 +48,10 @@ export function TextAreaInput<TFieldValues extends FieldValues = FieldValues>({
           error ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
         }`}
       />
+
+      {helpText && !error && (
+        <p className="text-slate-400 text-xs mt-1.5">{helpText}</p>
+      )}
 
       {error?.message && (
         <p className="text-red-400 text-sm mt-1">{error.message as string}</p>
