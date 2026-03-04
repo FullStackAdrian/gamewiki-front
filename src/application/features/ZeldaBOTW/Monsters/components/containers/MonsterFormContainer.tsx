@@ -1,28 +1,19 @@
 import React, { useMemo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// Infraestructura y dominio
 import { MonsterRepository } from "../../../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
 import { MonsterUsecase } from "../../MonsterUsecase";
 import { MonsterService } from "../../MonsterService";
-
-// Hook personalizado (asumimos que lo tienes o lo crearás)
 import useMonsterFormHook from "../../hooks/useMonsterFormHook";
-
-// Schema Zod (el que hemos estado trabajando)
-import { monsterSchema } from "../../schemas/monster";
-
-// UI components
+import { monsterSchema } from "../../schemas/MonsterSchema";
+// components
 import { Loading } from "../../../../../shared/components/common/Loading";
-import MonsterForm from "../ui/MonsterForm"; // el formulario puro que hicimos antes
-
-// Tipos
+import MonsterForm from "../ui/MonsterForm";
 import type { Monster } from "../../schemas/MonsterSchema";
 
 interface MonsterFormContainerProps {
-  monsterId?: number; // opcional → si existe → modo edición
-  onSuccess?: () => void; // callback para cerrar modal, redirigir, etc.
+  monsterId?: number;
+  onSuccess?: () => void;
   onCancel?: () => void;
 }
 
@@ -31,7 +22,6 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
   onSuccess,
   onCancel,
 }) => {
-  // Instancias memoizadas (igual que en MonstersContainer)
   const monsterRepository = useMemo(() => new MonsterRepository(), []);
   const monsterService = useMemo(
     () => new MonsterService(monsterRepository),
