@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "zod-resolver";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Infraestructura y dominio
 import { MonsterRepository } from "../../../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
@@ -18,7 +18,7 @@ import { Loading } from "../../../../../shared/components/common/Loading";
 import MonsterForm from "../ui/MonsterForm"; // el formulario puro que hicimos antes
 
 // Tipos
-import type { Monster } from "../../schemas/monster";
+import type { Monster } from "../../schemas/MonsterSchema";
 
 interface MonsterFormContainerProps {
   monsterId?: number; // opcional → si existe → modo edición
