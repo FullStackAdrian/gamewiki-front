@@ -6,10 +6,10 @@ import { MonsterUsecase } from "../../MonsterUsecase";
 import { MonsterService } from "../../MonsterService";
 import useMonsterFormHook from "../../hooks/useMonsterFormHook";
 import { monsterSchema } from "../../schemas/MonsterSchema";
-// components
 import { Loading } from "../../../../../shared/components/common/Loading";
 import MonsterForm from "../ui/MonsterForm";
 import type { Monster } from "../../schemas/MonsterSchema";
+import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface"; // Tipo para el modelo de dominio (arrays de strings)
 
 interface MonsterFormContainerProps {
   monsterId?: number;
@@ -23,16 +23,17 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
   onCancel,
 }) => {
   const monsterRepository = useMemo(() => new MonsterRepository(), []);
+
   const monsterService = useMemo(
     () => new MonsterService(monsterRepository),
     [monsterRepository],
   );
+
   const monsterUsecase = useMemo(
     () => new MonsterUsecase(monsterService),
     [monsterService],
   );
 
-  // Hook que maneja la lógica del formulario (carga datos si es edición, submit, etc.)
   const { isLoading, isSubmitting, initialData, error, handleSubmitForm } =
     useMonsterFormHook({
       usecase: monsterUsecase,
@@ -50,36 +51,41 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
       drops: "",
       image: "",
     },
-    values: initialData, // si viene de edición, se carga aquí
   });
 
-  // Si hay datos iniciales (edición), reseteamos el form
   useEffect(() => {
     if (initialData) {
       form.reset({
-        ...initialData,
-        // Convertimos arrays a strings con saltos de línea
-        common_locations: initialData.common_locations?.join("\n") || "",
-        drops: initialData.drops?.join("\n") || "",
+        id_num: initialData.id_num,
+        name: initialData.name,
+        category: initialData.category,
+        description: initialData.description,
+        image: initialData.image ?? "",
+        common_locations: initialData.common_locations?.join("\n") ?? "",
+        drops: initialData.drops?.join("\n") ?? "",
       });
     }
   }, [initialData, form]);
 
   const onSubmit = form.handleSubmit(async (data) => {
-    const payload = {
-      ...data,
+    const transformedData: MonsterModelInterface = {
       id_num: Number(data.id_num),
+      name: data.name,
+      category: data.category,
+      description: data.description,
+      image: data.image || "",
+
       common_locations: data.common_locations
         .split("\n")
         .map((s) => s.trim())
-        .filter(Boolean),
+        .filter((s) => s.length > 0),
       drops: data.drops
         .split("\n")
         .map((s) => s.trim())
-        .filter(Boolean),
+        .filter((s) => s.length > 0),
     };
 
-    const success = await handleSubmitForm(payload);
+    const success = await handleSubmitForm(transformedData);
     if (success && onSuccess) {
       onSuccess();
     }
@@ -103,9 +109,20 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-slate-800 rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold text-slate-100 mb-6">
-        {monsterId ? "Editar Monstruo" : "Crear Nuevo Monstruo"}
-      </h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-slate-100">
+          {monsterId ? "Editar Monstruo" : "Crear Nuevo Monstruo"}
+        </h2>
+        {onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg"
+          >
+            Cancelar
+          </button>
+        )}
+      </div>
 
       <MonsterForm
         register={form.register}
@@ -114,7 +131,9 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
       />
 
       {isSubmitting && (
-        <div className="mt-4 text-center text-slate-400">Guardando...</div>
+        <div className="mt-6 text-center text-slate-400 animate-pulse">
+          Guardando monstruo...
+        </div>
       )}
     </div>
   );

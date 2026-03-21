@@ -27,7 +27,7 @@ export const monsterSchema = z.object({
     }),
 
   common_locations: z
-    .array(z.string())
+    .string()
     .min(1, { message: "At least one location is required" })
     .max(10, { message: "Too many locations" }),
 
@@ -36,7 +36,7 @@ export const monsterSchema = z.object({
     .min(10, { message: "Description must be at least 10 characters" })
     .max(500, { message: "Description is too long" }),
 
-  drops: z.array(z.string()).min(0).max(10, { message: "Too many drop items" }),
+  drops: z.string().min(0).max(10, { message: "Too many drop items" }),
 
   image: z
     .string()
