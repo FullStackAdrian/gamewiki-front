@@ -10,7 +10,7 @@ const MonsterView: React.FC = () => {
   const monster = location.state?.monster as MonsterModelInterface | undefined;
 
   const handleSuccess = () => {
-    navigate("/");
+    navigate("/zelda/monsters");
   };
 
   return (
