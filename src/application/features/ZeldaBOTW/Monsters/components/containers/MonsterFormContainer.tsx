@@ -5,7 +5,7 @@ import { MonsterRepository } from "../../../../../../infrastructure/features/Zel
 import { MonsterUsecase } from "../../MonsterUsecase";
 import { MonsterService } from "../../MonsterService";
 import useMonsterFormHook from "../../hooks/useMonsterFormHook";
-import { monsterSchema } from "../../schemas/MonsterSchema";
+import { monsterCategories, monsterSchema } from "../../schemas/MonsterSchema";
 import { Loading } from "../../../../../shared/components/common/Loading";
 import MonsterForm from "../ui/MonsterForm";
 import type { Monster } from "../../schemas/MonsterSchema";
@@ -56,7 +56,9 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
       form.reset({
         id_num: initialData.id_num,
         name: initialData.name,
-        category: initialData.category,
+        category: initialData.category && monsterCategories.includes(initialData.category as any)
+          ? initialData.category
+          : "",
         description: initialData.description,
         image: initialData.image ?? "",
         common_locations: initialData.common_locations?.join("\n") ?? "",
@@ -123,3 +125,4 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
 };
 
 export default MonsterFormContainer;
+

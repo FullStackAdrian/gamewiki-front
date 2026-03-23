@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const monsterCategories = [
-  "monsters",
-  "creatures",
-  "materials",
-  "equipment",
-  "treasures",
+  "monstruos",
+  "criaturas",
+  "materiales",
+  "equipo",
+  "tesoros",
 ] as const;
 
 export const monsterSchema = z.object({

@@ -33,11 +33,11 @@ export default function MonsterForm({ register, errors, onSubmit }: MonsterFormP
           errors={errors}
           options={[
             { value: "", label: "-- Selecciona categoría --" },
-            { value: "monsters", label: "Monstruos" },
-            { value: "creatures", label: "Criaturas" },
-            { value: "materials", label: "Materiales" },
-            { value: "equipment", label: "Equipo" },
-            { value: "treasures", label: "Tesoros" },
+            { value: "monstruos", label: "Monstruos" },
+            { value: "criaturas", label: "Criaturas" },
+            { value: "materiales", label: "Materiales" },
+            { value: "equipo", label: "Equipo" },
+            { value: "tesoros", label: "Tesoros" },
             
           ]}
         />
