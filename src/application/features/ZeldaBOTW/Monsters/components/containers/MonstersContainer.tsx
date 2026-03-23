@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { MonsterRepository } from "../../../../../../infrastructure/features/ZeldaBOTW/Monsters/MonsterRepository";
+import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
 import { MonsterUsecase } from "../../MonsterUsecase";
 import { MonsterService } from "../../MonsterService";
 import useMonstersHook from "../../hooks/useMonstersHook";
@@ -19,7 +21,14 @@ const MonstersContainer: React.FC = () => {
     [monsterService], 
   );
 
-  const { monsters, handleSelectMonster, deleteMonster, isLoading, error, } = useMonstersHook(monsterUsecase);
+  const navigate = useNavigate();
+
+  const { monsters, deleteMonster, isLoading, error, } = useMonstersHook(monsterUsecase);
+
+  const handleSelectMonster = (monster: MonsterModelInterface) => {
+    navigate("/zelda/monster", { state: { monster } });
+  };
+
 
   if (isLoading) {
     return <Loading message="Cargando monstruos..." />;

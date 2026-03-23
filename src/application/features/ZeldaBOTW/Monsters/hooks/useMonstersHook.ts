@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import useLoading from "../../../../shared/hooks/useLoading";
-import { useNavigate } from "react-router-dom";
 //types
 import type { MonsterUsecaseInterface } from "../../../../../domain/features/ZeldaBOTW/Monsters/MonsterUsecaseInterface";
 import type { MonsterModelInterface } from "../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
 
 const useMonstersHook = (monsterUsecase: MonsterUsecaseInterface) => {
-  const navigate = useNavigate();
   const [monsters, setMonsters] = useState<MonsterModelInterface[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { isLoading, startLoading, stopLoading } = useLoading();
@@ -27,9 +25,6 @@ const useMonstersHook = (monsterUsecase: MonsterUsecaseInterface) => {
     fetchMonsters();
   }, [monsterUsecase]);
 
-  const handleSelectMonster = (monster: MonsterModelInterface) => {
-    navigate("/monster", { state: { monster } });
-  };
 
   const deleteMonster = async (id: number) => {
     try {
@@ -43,7 +38,7 @@ const useMonstersHook = (monsterUsecase: MonsterUsecaseInterface) => {
     }
   };
 
-  return { monsters, isLoading, error, handleSelectMonster, deleteMonster };
+  return { monsters, isLoading, error, deleteMonster };
 };
 
 export default useMonstersHook;

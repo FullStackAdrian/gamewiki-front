@@ -24,7 +24,7 @@ export function MonsterCard({
 
   const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    navigate("/edit", { state: { monster } });
+    navigate("/zelda/monster/edit", { state: { monster } });
   };
 
   return (
@@ -55,3 +55,4 @@ export function MonsterCard({
     </Card>
   );
 }
+

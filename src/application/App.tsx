@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./shared/components/layouts/MainLayout";
+import ZeldaBOTWPage from "./features/ZeldaBOTW/ZeldaBOTWPage";
 import MonstersView from "./features/ZeldaBOTW/Monsters/views/MonstersView";
 import MonsterView from "./features/ZeldaBOTW/Monsters/views/MonsterView";
 import UpdateMonsterView from "./features/ZeldaBOTW/Monsters/views/UpdateMonsterView";
@@ -30,30 +31,17 @@ function App() {
           />
 
           <Route path="*" element={<Navigate to="/" replace />} /> */}
-        <Route
-          path="/"
-          element={
-            <MainLayout>
-              <MonstersView />
-            </MainLayout>
-          }
-        ></Route>
-        <Route
-          path="/monster"
-          element={
-            <MainLayout>
-              <MonsterView />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/edit"
-          element={
-            <MainLayout>
-              <UpdateMonsterView />
-            </MainLayout>
-          }
-        />
+
+        <Route path="/" element={<Navigate to="/zelda" replace />} />
+
+        {/* Rutas de Zelda */}
+        <Route path="/zelda" element={<MainLayout><ZeldaBOTWPage /></MainLayout>} />
+
+        <Route path="/zelda/monsters" element={<MainLayout><MonstersView /></MainLayout>} />
+        <Route path="/zelda/monster" element={<MainLayout><MonsterView /></MainLayout>} />
+        <Route path="/zelda/monster/edit" element={<MainLayout><UpdateMonsterView /></MainLayout>} />
+
+        {/* Aquí luego añadirías /zelda/materials... */}
       </Routes>
     </BrowserRouter>
   );

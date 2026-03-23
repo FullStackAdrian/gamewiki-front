@@ -15,14 +15,14 @@ const MonsterDetailedContainer: React.FC<MonsterDetailedContainerProps> = ({
     return (
       <div className="text-center p-8">
         <p className="text-gray-600">Monstruo no encontrado</p>
-        <GoBackButton route="/"></GoBackButton>
+        <GoBackButton route="/zelda/monsters"></GoBackButton>
       </div>
     );
   }
 
   return (
     <div className="m-4">
-      <GoBackButton route="/"></GoBackButton>
+      <GoBackButton route="/zelda/monsters"></GoBackButton>
       <DetailCard
         image={monster.image}
         imageAlt={monster.name}

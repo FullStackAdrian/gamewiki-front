@@ -112,7 +112,7 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
         <h2 className="text-2xl font-bold text-slate-100">
           {monsterId ? "Editar Monstruo" : "Crear Nuevo Monstruo"}
         </h2>
-        <GoBackButton route='/' ></GoBackButton>
+        <GoBackButton route='/zelda/monsters' ></GoBackButton>
       </div>
 
       <MonsterForm
