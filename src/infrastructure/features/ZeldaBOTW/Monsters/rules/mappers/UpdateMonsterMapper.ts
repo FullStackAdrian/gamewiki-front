@@ -23,7 +23,7 @@ export class UpdateMonsterMapper extends BaseMapper<
       const ent = param as MonsterModelInterface;
       const requestBody = JSON.parse(JSON.stringify(ent));
       const request = {
-        uri: `/monster/${ent.id_num}`,
+        uri: `/monsters/${ent.id_num}`,
         body: requestBody,
       } as UpdateMonsterByIdRequestInterface;
 
