@@ -14,7 +14,8 @@ interface UseMonsterFormHookReturn {
   isSubmitting: boolean;
   initialData: Partial<MonsterModelInterface> | null;
   error: string | null;
-  handleSubmitForm: (data: MonsterModelInterface) => Promise<boolean>;
+  handleCreateSubmitForm: (data: MonsterModelInterface) => Promise<boolean>;
+  handleUpdateSubmitForm: (data: MonsterModelInterface) => Promise<boolean>;
 }
 
 export function useMonsterFormHook({
@@ -61,16 +62,38 @@ export function useMonsterFormHook({
     };
   }, [usecase, monsterId]);
 
-  const handleSubmitForm = useCallback(
+  const handleCreateSubmitForm = useCallback(
     async (data: MonsterModelInterface): Promise<boolean> => {
       setIsSubmitting(true);
       setError(null);
 
       try {
-        if (monsterId) {
-          await usecase.updateMonster(data); 
+        await usecase.createMonster(data);
+
+        return true;
+      } catch (err) {
+        console.error("Error al guardar monstruo:", err);
+        setError(
+          "No se pudo guardar el monstruo. Revisa los datos e inténtalo de nuevo.",
+        );
+        return false;
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [usecase, monsterId],
+  );
+
+  const handleUpdateSubmitForm = useCallback(
+    async (data: MonsterModelInterface): Promise<boolean> => {
+      setIsSubmitting(true);
+      setError(null);
+
+      try {
+        if (typeof monsterId === "number" && monsterId > 0) {
+          await usecase.updateMonster(data);
         } else {
-          await usecase.createMonster(data);
+          throw new Error("Error handling form submit must need monster id");
         }
         return true;
       } catch (err) {
@@ -83,7 +106,7 @@ export function useMonsterFormHook({
         setIsSubmitting(false);
       }
     },
-    [usecase, monsterId], 
+    [usecase, monsterId],
   );
 
   return {
@@ -91,7 +114,8 @@ export function useMonsterFormHook({
     isSubmitting,
     initialData,
     error,
-    handleSubmitForm,
+    handleCreateSubmitForm,
+    handleUpdateSubmitForm,
   };
 }
 

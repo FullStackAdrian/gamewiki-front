@@ -5,6 +5,7 @@ import ZeldaBOTWPage from "./features/ZeldaBOTW/ZeldaBOTWPage";
 import MonstersView from "./features/ZeldaBOTW/Monsters/views/MonstersView";
 import MonsterView from "./features/ZeldaBOTW/Monsters/views/MonsterView";
 import UpdateMonsterView from "./features/ZeldaBOTW/Monsters/views/UpdateMonsterView";
+import CreateMonsterView from "./features/ZeldaBOTW/Monsters/views/CreateMonsterView";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
 
         <Route path="/zelda/monsters" element={<MainLayout><MonstersView /></MainLayout>} />
         <Route path="/zelda/monster" element={<MainLayout><MonsterView /></MainLayout>} />
+        <Route path="/zelda/monster/create" element={<MainLayout><CreateMonsterView /></MainLayout>} />
         <Route path="/zelda/monster/edit" element={<MainLayout><UpdateMonsterView /></MainLayout>} />
 
         {/* Aquí luego añadirías /zelda/materials... */}

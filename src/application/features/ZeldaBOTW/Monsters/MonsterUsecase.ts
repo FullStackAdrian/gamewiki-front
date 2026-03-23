@@ -9,6 +9,19 @@ export class MonsterUsecase implements MonsterUsecaseInterface {
     this.monsterService = monsterService;
   }
 
+  async getNextMonsterId(): Promise<number> {
+    const monsters = await this.monsterService.getAllMonsters();
+
+    if (monsters.length === 0) {
+      return 1;
+    }
+
+    const ids = monsters.map((m) => m.id_num);
+    const maxId = Math.max(...ids);
+
+    return maxId + 1;
+  }
+
   async createMonster(entity: MonsterModelInterface): Promise<MonsterModelInterface> {
     return  await this.monsterService.createMonster(entity);
   }

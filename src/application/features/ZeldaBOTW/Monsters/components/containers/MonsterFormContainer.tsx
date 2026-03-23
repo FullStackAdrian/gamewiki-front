@@ -32,11 +32,17 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
     [monsterService],
   );
 
-  const { isLoading, isSubmitting, initialData, error, handleSubmitForm } =
-    useMonsterFormHook({
-      usecase: monsterUsecase,
-      monsterId,
-    });
+  const {
+    isLoading,
+    isSubmitting,
+    initialData,
+    error,
+    handleCreateSubmitForm,
+    handleUpdateSubmitForm,
+  } = useMonsterFormHook({
+    usecase: monsterUsecase,
+    monsterId,
+  });
 
   const form = useForm<Monster>({
     resolver: zodResolver(monsterSchema),
@@ -51,14 +57,26 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
     },
   });
 
+    useEffect(() => {
+      const fetchNextId = async () => {
+      if (!monsterId && !initialData?.id_num) {
+          const nextId = await monsterUsecase.getNextMonsterId();
+          form.setValue("id_num", nextId);
+        }
+      };
+      fetchNextId();
+  }, [monsterId, monsterUsecase, form, initialData]);
+
   useEffect(() => {
     if (initialData) {
       form.reset({
         id_num: initialData.id_num,
         name: initialData.name,
-        category: initialData.category && monsterCategories.includes(initialData.category as any)
-          ? initialData.category
-          : "",
+        category:
+          initialData.category &&
+          monsterCategories.includes(initialData.category as any)
+            ? initialData.category
+            : "",
         description: initialData.description,
         image: initialData.image ?? "",
         common_locations: initialData.common_locations?.join("\n") ?? "",
@@ -85,7 +103,11 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
         .filter((s) => s.length > 0),
     };
 
-    const success = await handleSubmitForm(transformedData);
+    const success =
+      typeof monsterId === "number"
+        ? await handleUpdateSubmitForm(transformedData)
+        : await handleCreateSubmitForm(transformedData);
+
     if (success && onSuccess) {
       onSuccess();
     }
