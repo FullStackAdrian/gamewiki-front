@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
 import { Card } from "../../../../../shared/components/ui/cards/Card";
 import DeleteButton from "../../../../../shared/components/ui/DeleteButton";
+import GenericButton from "../../../../../shared/components/ui/GenericButton";
 
 interface MonsterCardProps {
   monster: MonsterModelInterface;
@@ -13,10 +15,16 @@ export function MonsterCard({
   onClick,
   onClickDelete,
 }: MonsterCardProps) {
-  
+  const navigate = useNavigate();
+
   const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     onClick();
+  };
+
+  const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    navigate("/edit", { state: { monster } });
   };
 
   return (
@@ -35,8 +43,15 @@ export function MonsterCard({
         <span className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">
           {monster.category}
         </span>
+        <div className="flex gap-2">
+          <GenericButton
+            text="Editar"
+            onClick={handleEdit}
+            variant="secondary"
+          />
+          <DeleteButton onClick={onClickDelete}></DeleteButton>
+        </div>
       </div>
-      <DeleteButton onClick={onClickDelete}></DeleteButton>
     </Card>
   );
 }

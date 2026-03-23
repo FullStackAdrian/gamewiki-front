@@ -10,17 +10,16 @@ import { Loading } from "../../../../../shared/components/common/Loading";
 import MonsterForm from "../ui/MonsterForm";
 import type { Monster } from "../../schemas/MonsterSchema";
 import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface"; // Tipo para el modelo de dominio (arrays de strings)
+import GoBackButton from "../../../../../shared/components/ui/GoBackButton";
 
 interface MonsterFormContainerProps {
   monsterId?: number;
   onSuccess?: () => void;
-  onCancel?: () => void;
 }
 
 const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
   monsterId,
   onSuccess,
-  onCancel,
 }) => {
   const monsterRepository = useMemo(() => new MonsterRepository(), []);
 
@@ -113,15 +112,7 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
         <h2 className="text-2xl font-bold text-slate-100">
           {monsterId ? "Editar Monstruo" : "Crear Nuevo Monstruo"}
         </h2>
-        {onCancel && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg"
-          >
-            Cancelar
-          </button>
-        )}
+        <GoBackButton route='/' ></GoBackButton>
       </div>
 
       <MonsterForm

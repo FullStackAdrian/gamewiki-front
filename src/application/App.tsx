@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./shared/components/layouts/MainLayout";
 import MonstersView from "./features/ZeldaBOTW/Monsters/views/MonstersView";
 import MonsterView from "./features/ZeldaBOTW/Monsters/views/MonsterView";
+import UpdateMonsterView from "./features/ZeldaBOTW/Monsters/views/UpdateMonsterView";
 
 function App() {
   return (
@@ -45,9 +46,18 @@ function App() {
             </MainLayout>
           }
         />
+        <Route
+          path="/edit"
+          element={
+            <MainLayout>
+              <UpdateMonsterView />
+            </MainLayout>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
