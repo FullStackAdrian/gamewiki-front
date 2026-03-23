@@ -10,7 +10,6 @@ import { Loading } from "../../../../../shared/components/common/Loading";
 import MonsterForm from "../ui/MonsterForm";
 import type { Monster } from "../../schemas/MonsterSchema";
 import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface"; // Tipo para el modelo de dominio (arrays de strings)
-import GoBackButton from "../../../../../shared/components/ui/GoBackButton";
 
 interface MonsterFormContainerProps {
   monsterId?: number;
@@ -107,14 +106,7 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-slate-800 rounded-xl shadow-lg">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-slate-100">
-          {monsterId ? "Editar Monstruo" : "Crear Nuevo Monstruo"}
-        </h2>
-        <GoBackButton route='/zelda/monsters' ></GoBackButton>
-      </div>
-
+    <div>
       <MonsterForm
         register={form.register}
         errors={form.formState.errors}

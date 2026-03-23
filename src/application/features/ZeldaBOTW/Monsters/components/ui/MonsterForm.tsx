@@ -14,7 +14,7 @@ export default function MonsterForm({ register, errors, onSubmit }: MonsterFormP
   return (
     <FormContainer 
       id="monster-form" 
-      title="Crear / Editar Monstruo" 
+      title="" 
       onSubmit={onSubmit}
     >
       <div className="space-y-6">

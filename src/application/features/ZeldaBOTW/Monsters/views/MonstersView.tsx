@@ -1,13 +1,15 @@
 import MonstersContainer from "../components/containers/MonstersContainer";
+import PageTitle from "../../../../shared/ui/PageTitle";
 
 const MonstersView: React.FC = () => {
 
   return (
     <div className="m-4">
-      <h1 className="my-10 font-bold text-3xl text-center " >Monstruos de Zelda BOTW</h1>
+      <PageTitle text="Monstruos de Zelda BOTW" />
       <MonstersContainer></MonstersContainer>
     </div>
   );
 };
 
 export default MonstersView;
+
