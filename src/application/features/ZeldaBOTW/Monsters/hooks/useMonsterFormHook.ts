@@ -38,7 +38,6 @@ export function useMonsterFormHook({
       setError(null);
 
       try {
-        // usecase.getMonsterById espera un string según tu MonsterUsecase.ts actual
         const monster = await usecase.getMonsterById(monsterId.toString());
         if (isMounted) {
           setInitialData(monster);
@@ -62,7 +61,6 @@ export function useMonsterFormHook({
     };
   }, [usecase, monsterId]);
 
-  // Función para guardar/crear
   const handleSubmitForm = useCallback(
     async (data: MonsterModelInterface): Promise<boolean> => {
       setIsSubmitting(true);

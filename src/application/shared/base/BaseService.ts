@@ -29,10 +29,7 @@ export class BaseService<
     TResponse extends BaseResponseInterface<TModel>,
     TMapper extends BaseMapperInterface<TModel, TRequest, TResponse>,
   >(id: string, mapper: TMapper): Promise<TModel> {
-    const request = {
-      uri: `/${id}`,
-    } as TRequest;
-
+    const request = await mapper.toRequest(id);
     const response = await this.repository.getById<TRequest, TResponse>(
       request,
     );

@@ -13,7 +13,7 @@ export class GetMonsterMapper extends BaseMapper<
   ): Promise<GetMonsterByIdRequestInterface> {
     if (typeof param === "string") {
       const request = {
-        uri: `/monster/${param}`,
+        uri: `/monsters/${param}`,
       } as GetMonsterByIdRequestInterface;
       return request;
     } else if (param !== undefined) {
