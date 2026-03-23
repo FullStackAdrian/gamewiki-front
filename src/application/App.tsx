@@ -6,6 +6,10 @@ import MonstersView from "./features/ZeldaBOTW/Monsters/views/MonstersView";
 import MonsterView from "./features/ZeldaBOTW/Monsters/views/MonsterView";
 import UpdateMonsterView from "./features/ZeldaBOTW/Monsters/views/UpdateMonsterView";
 import CreateMonsterView from "./features/ZeldaBOTW/Monsters/views/CreateMonsterView";
+import MaterialsView from "./features/ZeldaBOTW/Materials/views/MaterialsView";
+import MaterialView from "./features/ZeldaBOTW/Materials/views/MaterialView";
+import CreateMaterialView from "./features/ZeldaBOTW/Materials/views/CreateMaterialView";
+import UpdateMaterialView from "./features/ZeldaBOTW/Materials/views/UpdateMaterialView";
 
 function App() {
   return (
@@ -42,6 +46,11 @@ function App() {
         <Route path="/zelda/monster" element={<MainLayout><MonsterView /></MainLayout>} />
         <Route path="/zelda/monster/create" element={<MainLayout><CreateMonsterView /></MainLayout>} />
         <Route path="/zelda/monster/edit" element={<MainLayout><UpdateMonsterView /></MainLayout>} />
+        
+        <Route path="/zelda/materials" element={<MainLayout><MaterialsView /></MainLayout>} />
+        <Route path="/zelda/material" element={<MainLayout><MaterialView /></MainLayout>} />
+        <Route path="/zelda/material/create" element={<MainLayout><CreateMaterialView /></MainLayout>} />
+        <Route path="/zelda/material/edit" element={<MainLayout><UpdateMaterialView /></MainLayout>} />
 
         {/* Aquí luego añadirías /zelda/materials... */}
       </Routes>
