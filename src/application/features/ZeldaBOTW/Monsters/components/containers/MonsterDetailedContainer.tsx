@@ -2,7 +2,6 @@ import React from "react";
 import { DetailCard } from "../../../../../shared/components/ui/cards/DetailedCard";
 import GoBackButton from "../../../../../shared/components/ui/GoBackButton";
 import type { MonsterModelInterface } from "../../../../../../domain/features/ZeldaBOTW/Monsters/MonsterModelInterface";
-import { useNavigate } from "react-router-dom";
 
 interface MonsterDetailedContainerProps {
   monster: MonsterModelInterface | undefined;
@@ -11,19 +10,12 @@ interface MonsterDetailedContainerProps {
 const MonsterDetailedContainer: React.FC<MonsterDetailedContainerProps> = ({
   monster,
 }) => {
-  const navigate = useNavigate();
-
 
   if (monster === undefined) {
     return (
       <div className="text-center p-8">
         <p className="text-gray-600">Monstruo no encontrado</p>
-        <button
-          onClick={() => navigate("/")}
-          className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-        >
-          Volver
-        </button>
+        <GoBackButton route="/"></GoBackButton>
       </div>
     );
   }
