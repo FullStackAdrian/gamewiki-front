@@ -5,18 +5,18 @@ import TextAreaInput from "../../../../../shared/components/ui/form/inputs/TextA
 import SubmitButton from "../../../../../shared/components/ui/form/SubmitButton";
 
 interface MaterialFormProps {
-  register: any;           
-  errors: any;             
-  onSubmit: () => void;    
+  register: any;
+  errors: any;
+  onSubmit: () => void;
 }
 
-export default function MaterialForm({ register, errors, onSubmit }: MaterialFormProps) {
+export default function MaterialForm({
+  register,
+  errors,
+  onSubmit,
+}: MaterialFormProps) {
   return (
-    <FormContainer 
-      id="material-form" 
-      title="" 
-      onSubmit={onSubmit}
-    >
+    <FormContainer id="material-form" title="" onSubmit={onSubmit}>
       <div className="space-y-6">
         <TextInput
           name="name"
@@ -38,7 +38,6 @@ export default function MaterialForm({ register, errors, onSubmit }: MaterialFor
             { value: "materiales", label: "Materiales" },
             { value: "equipo", label: "Equipo" },
             { value: "tesoros", label: "Tesoros" },
-            
           ]}
         />
 
@@ -52,6 +51,22 @@ export default function MaterialForm({ register, errors, onSubmit }: MaterialFor
           helpText="Separa cada ubicación con una nueva línea. Se convertirá en array."
         />
 
+        <TextInput
+          name="cooking_effect"
+          label="Efecto de Cocina"
+          placeholder="Ej: Corazones extra"
+          register={register}
+          errors={errors}
+        />
+
+        <TextInput
+          name="hearts_recovered"
+          label="Corazones Recuperados"
+          placeholder="Ej: 3"
+          register={register}
+          errors={errors}
+        />
+
         <TextAreaInput
           name="description"
           label="Descripción"
@@ -59,16 +74,6 @@ export default function MaterialForm({ register, errors, onSubmit }: MaterialFor
           rows={5}
           register={register}
           errors={errors}
-        />
-
-        <TextAreaInput
-          name="drops"
-          label="Objetos que suelta (uno por línea)"
-          placeholder="Cuerno de Lizalfos\nCola de Lizalfos\n..."
-          rows={3}
-          register={register}
-          errors={errors}
-          helpText="Separa cada drop con una nueva línea. Se convertirá en array."
         />
 
         <TextInput
@@ -80,7 +85,7 @@ export default function MaterialForm({ register, errors, onSubmit }: MaterialFor
         />
 
         <div className="pt-4">
-          <SubmitButton text="Guardar Monstruo" />
+          <SubmitButton text="Guardar Material" />
         </div>
       </div>
     </FormContainer>

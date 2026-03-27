@@ -13,7 +13,7 @@ const CreateMaterialView: React.FC = () => {
   return (
     <div className="mx-10 my-6">
       <GoBackButton route="/zelda/materials"></GoBackButton>
-      <PageTitle text="Crear Nuevo Monstruo"></PageTitle>
+      <PageTitle text="Crear Nuevo Material"></PageTitle>
       <MaterialFormContainer
         materialId={undefined}
         onSuccess={handleSuccess}

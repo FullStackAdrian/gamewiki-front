@@ -50,17 +50,26 @@ const MaterialFormContainer: React.FC<MaterialFormContainerProps> = ({
   const form = useForm<Material>({
     resolver: zodResolver(materialSchema),
     defaultValues: {
-      id_num: initialData?.id_num ,
-      name: initialData?.name ,
-      category: initialData?.category ,
-      common_locations: initialData?.common_locations?.join("\n") ,
-      cooking_effect: initialData?.cooking_effect ,
-      hearts_recovered: initialData?.hearts_recovered ,
-      description: initialData?.description ,
-      drops: initialData?.drops?.join("\n") ,
-      image: initialData?.image ,
+      id_num: 0,
+      name: "",
+      category: "",
+      common_locations: "",
+      cooking_effect: "",
+      hearts_recovered: 0,
+      description: "",
+      image: "",
     },
   });
+
+  useEffect(() => {
+    const fetchNextId = async () => {
+      if (!materialId && !initialData?.id_num) {
+        const nextId = await materialUsecase.getNextMaterialId();
+        form.setValue("id_num", nextId);
+      }
+    };
+    fetchNextId();
+  }, [materialId, materialUsecase, form, initialData]);
 
   useEffect(() => {
     if (initialData) {
@@ -77,7 +86,6 @@ const MaterialFormContainer: React.FC<MaterialFormContainerProps> = ({
         description: initialData.description,
         image: initialData.image ?? "",
         common_locations: initialData.common_locations?.join("\n") ?? "",
-        drops: initialData.drops?.join("\n") ?? "",
       });
     }
   }, [initialData, form]);
@@ -95,10 +103,6 @@ const MaterialFormContainer: React.FC<MaterialFormContainerProps> = ({
         .split("\n")
         .map((s) => s.trim())
         .filter((s) => s.length > 0),
-      drops: data.drops
-        .split("\n")
-        .map((s) => s.trim())
-        .filter((s) => s.length > 0),
     };
 
     const success =
@@ -111,13 +115,11 @@ const MaterialFormContainer: React.FC<MaterialFormContainerProps> = ({
     }
   });
 
-  // ... existing code ...
-
   if (isLoading) {
     return (
       <Loading
         message={
-          materialId ? "Cargando monstruo..." : "Preparando formulario..."
+          materialId ? "Cargando material..." : "Preparando formulario..."
         }
       />
     );
@@ -139,7 +141,7 @@ const MaterialFormContainer: React.FC<MaterialFormContainerProps> = ({
 
       {isSubmitting && (
         <div className="mt-6 text-center text-slate-400 animate-pulse">
-          Guardando monstruo...
+          Guardando material...
         </div>
       )}
     </div>

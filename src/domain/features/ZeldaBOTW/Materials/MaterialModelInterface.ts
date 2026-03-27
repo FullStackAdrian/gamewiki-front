@@ -8,6 +8,5 @@ export interface MaterialModelInterface extends BaseModelInterface {
     description: string;
     cooking_effect: string;
     hearts_recovered: number;
-    drops: string[];
     image?: string ;
 }

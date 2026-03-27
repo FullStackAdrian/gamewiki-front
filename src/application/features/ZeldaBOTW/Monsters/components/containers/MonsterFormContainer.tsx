@@ -57,14 +57,14 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
     },
   });
 
-    useEffect(() => {
-      const fetchNextId = async () => {
+  useEffect(() => {
+    const fetchNextId = async () => {
       if (!monsterId && !initialData?.id_num) {
-          const nextId = await monsterUsecase.getNextMonsterId();
-          form.setValue("id_num", nextId);
-        }
-      };
-      fetchNextId();
+        const nextId = await monsterUsecase.getNextMonsterId();
+        form.setValue("id_num", nextId);
+      }
+    };
+    fetchNextId();
   }, [monsterId, monsterUsecase, form, initialData]);
 
   useEffect(() => {
@@ -147,4 +147,3 @@ const MonsterFormContainer: React.FC<MonsterFormContainerProps> = ({
 };
 
 export default MonsterFormContainer;
-
