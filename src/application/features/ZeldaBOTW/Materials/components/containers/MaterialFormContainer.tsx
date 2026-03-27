@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MaterialRepository } from "../../../../../../infrastructure/features/ZeldaBOTW/Materials/MaterialRepository";
 import { MaterialUsecase } from "../../MaterialUsecase";
@@ -48,7 +48,7 @@ const MaterialFormContainer: React.FC<MaterialFormContainerProps> = ({
   });
 
   const form = useForm<Material>({
-    resolver: zodResolver(materialSchema),
+    resolver: zodResolver(materialSchema) as Resolver<Material>,
     defaultValues: {
       id_num: 0,
       name: "",

@@ -34,7 +34,7 @@ export const materialSchema = z.object({
     .max(500, { message: "Description is too long" }),
   cooking_effect: z.string().min(1, { message: "Cooking effect is required" }),
   hearts_recovered: z
-    .number()
+    .coerce.number() 
     .positive({ message: "Hearts recovered must be equals or more than 0 " }),
   image: z
     .string()
