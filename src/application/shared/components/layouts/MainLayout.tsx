@@ -6,7 +6,7 @@ export interface MainLayoutProps {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="w-screen max-h-screen overflow-y-auto  bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
+    <div className="w-screen h-screen overflow-y-auto  bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
       <nav className="bg-slate-900/50 backdrop-blur-sm border-b border-slate-800">
         <div className="px-6 py-4 flex items-center justify-between">
           {/* Logo/Name */}
