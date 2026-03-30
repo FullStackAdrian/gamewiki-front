@@ -7,7 +7,7 @@ import GenericButton from "../../../../../shared/components/ui/GenericButton";
 interface MonsterCardProps {
   monster: MonsterModelInterface;
   onClick: () => void;
-  onClickDelete: () => void; // Cambia el tipo de onClick
+  onClickDelete: () => void; 
 }
 
 export function MonsterCard({

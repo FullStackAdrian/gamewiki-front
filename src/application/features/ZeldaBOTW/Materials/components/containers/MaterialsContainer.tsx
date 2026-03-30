@@ -8,6 +8,7 @@ import useMaterialsHook from "../../hooks/useMaterialsHook";
 // ui components
 import { Loading } from "../../../../../shared/components/common/Loading";
 import { MaterialCard } from "../ui/MaterialCard";
+import { AddMaterialCard } from "../ui/AddMaterialCard";
 
 
 const MaterialsContainer: React.FC = () => {
@@ -29,6 +30,9 @@ const MaterialsContainer: React.FC = () => {
     navigate("/zelda/material", { state: { material } });
   };
 
+  const handleAddMaterial = () => {
+    navigate("/zelda/material/create");
+  };
 
   if (isLoading) {
     return <Loading message="Cargando monstruos..." />;
@@ -40,6 +44,7 @@ const MaterialsContainer: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <AddMaterialCard onClick={handleAddMaterial} />
       {materials.map((material) => (
         <MaterialCard 
           key={material.id_num} 

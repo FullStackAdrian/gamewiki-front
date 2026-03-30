@@ -8,7 +8,7 @@ import useMonstersHook from "../../hooks/useMonstersHook";
 // ui components
 import { Loading } from "../../../../../shared/components/common/Loading";
 import { MonsterCard } from "../ui/MonsterCard";
-
+import { AddMonsterCard } from "../ui/AddMonsterCard";
 
 const MonstersContainer: React.FC = () => {
   const monsterRepository = useMemo(() => new MonsterRepository(), []);
@@ -18,17 +18,21 @@ const MonstersContainer: React.FC = () => {
   );
   const monsterUsecase = useMemo(
     () => new MonsterUsecase(monsterService),
-    [monsterService], 
+    [monsterService],
   );
 
   const navigate = useNavigate();
 
-  const { monsters, deleteMonster, isLoading, error, } = useMonstersHook(monsterUsecase);
+  const { monsters, deleteMonster, isLoading, error } =
+    useMonstersHook(monsterUsecase);
 
   const handleSelectMonster = (monster: MonsterModelInterface) => {
     navigate("/zelda/monster", { state: { monster } });
   };
 
+  const handleAddMonster = () => {
+    navigate("/zelda/monster/create");
+  };
 
   if (isLoading) {
     return <Loading message="Cargando monstruos..." />;
@@ -40,12 +44,13 @@ const MonstersContainer: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <AddMonsterCard onClick={handleAddMonster} />
       {monsters.map((monster) => (
-        <MonsterCard 
-          key={monster.id_num} 
+        <MonsterCard
+          key={monster.id_num}
           monster={monster}
           onClick={() => handleSelectMonster(monster)}
-          onClickDelete={ async () =>  await deleteMonster(monster.id_num)}
+          onClickDelete={async () => await deleteMonster(monster.id_num)}
         />
       ))}
     </div>
